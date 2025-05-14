@@ -7,7 +7,7 @@ format: docx
 
 **Figure 11: Altered global marker expression in ILT subsets by infant sex.** The beeswarm plots show the differentially expressed markers in V𝛿2 T cells (A), and in MAIT cells (B). The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status. Shape and color identify infant sex.
 
-\# Code
+# Code
 
 ```{r}
 library(purrr)

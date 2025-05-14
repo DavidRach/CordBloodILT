@@ -40,7 +40,7 @@ data <- read.csv("data/gd_D17Cytokine_HeatmapData.csv")
 RemoveMarkers <- c("Vd2")
 MarkerOrder <- c("CD45RO", "CD27", "PD1", "CD56", "TNFa", "IFNg", "CD107a")
 
-Table <- Coereba:::Coereba_Heatmap(data=TheHeatmap, RemoveMarkers=RemoveMarkers, MarkerOrder=MarkerOrder)
+Table <- Coereba:::Coereba_Heatmap(data=data, RemoveMarkers=RemoveMarkers, MarkerOrder=MarkerOrder)
 ```
 
 ```{r}
