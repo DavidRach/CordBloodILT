@@ -1,0 +1,245 @@
+---
+title: "Supplementary Table 3"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Table 3: GLM Output Table**
+
+
+# Code
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(purrr)
+library(broom)
+library(gt)
+
+StorageLocation <- file.path("SupplementalFigures/SupplementalTable3")
+```
+
+```{r}
+Vd2 <- read.csv("data/ILT_CtrlTetramer_Vd2ExpressionData.csv", check.names=FALSE) |> mutate(CellPop = "Vd2") |> relocate(CellPop, .before=1)
+MAIT <- read.csv("data/ILT_CtrlTetramer_MAITExpressionData.csv", check.names=FALSE) |> mutate(CellPop = "MAIT") |> relocate(CellPop, .before=1)
+NKT <- read.csv("data/ILT_CtrlTetramer_NKTExpressionData.csv", check.names=FALSE) |> mutate(CellPop = "NKT") |> relocate(CellPop, .before=1)
+```
+
+```{r}
+#augment(model2)
+#glance(model2)
+
+model1 <- kruskal.test(Data[[Marker]] ~ infant_sex, data = Data)
+tidyed1 <- tidy(model1) |> mutate(model="Model1")
+
+model2 <- glm(Data[[Marker]] ~infant_sex + ptype, family = gaussian, data=Data)
+tidyed2 <- tidy(model2, conf.int = TRUE, exponentiate = TRUE)
+
+model3 <- glm(Data[[Marker]] ~infant_sex + ptype + infant_sex*ptype, family = gaussian, data=Data)
+tidyed3 <- tidy(model3, conf.int = TRUE, exponentiate = TRUE)
+
+# Function for Table Compiling
+TheGLM <- function(Data, Marker){
+model <- glm(Data[[Marker]] ~infant_sex + ptype, family = gaussian, data=Data)
+tidyed3 <- tidy(model, conf.int = TRUE, exponentiate = TRUE) |>
+  mutate(OR_CI = sprintf("%.2f [%.2f–%.2f]", estimate, conf.low, conf.high),
+  p.value = ifelse(p.value < 0.001, "< 0.001", round(p.value, 3)),
+  significance = case_when(
+      p.value <= 0.001 ~ "***",
+      p.value <= 0.01 ~ "**",
+      p.value <= 0.05 ~ "*",
+      TRUE ~ ""
+    )) |> mutate(Tested=Marker)
+}
+
+TheGLM2 <- function(Data, Marker){
+model <- glm(Data[[Marker]] ~infant_sex + ptype + infant_sex*ptype, family = gaussian, data=Data)
+tidyed3 <- tidy(model, conf.int = TRUE, exponentiate = TRUE) |>
+  mutate(OR_CI = sprintf("%.2f [%.2f–%.2f]", estimate, conf.low, conf.high),
+  p.value = ifelse(p.value < 0.001, "< 0.001", round(p.value, 3)),
+  significance = case_when(
+      p.value <= 0.001 ~ "***",
+      p.value <= 0.01 ~ "**",
+      p.value <= 0.05 ~ "*",
+      TRUE ~ ""
+    )) |> mutate(Tested=Marker)
+}
+```
+
+```{r}
+# Simpler GLM
+
+library(stringr)
+
+Data <- Vd2
+
+Data$ptype <- factor(Data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+TheMarkers <- c("NKG2D", "CD8", "CD45RA", "CD62L", "CD25")
+Dataset <- map(.x=TheMarkers, .f=TheGLM, Data=Data) |> bind_rows()
+
+Dataset <- Dataset |>mutate(term = case_when(
+      term == "infant_sexMale" ~ "Sex: Male",
+      str_starts(term, "ptype") ~ str_replace(term, "ptype", "Exposure: "),
+      term == "(Intercept)" ~ "Intercept",
+      TRUE ~ term)
+  )
+
+Model <- Dataset |> select(Tested, term, estimate, std.error, statistic, p.value, OR_CI, significance) |>
+  gt(groupname_col = "Tested") |>
+
+  cols_label(
+    term = "Predictor",
+    estimate = "OR",
+    std.error = "SE",
+    statistic = "z-value",
+    p.value = "p-value",
+    OR_CI = "OR [95% CI]",
+    significance = ""
+  ) |> fmt_number(columns = c(estimate, std.error, statistic), decimals = 2) |>
+    tab_options(
+    row_group.as_column = TRUE,
+    row_group.background.color = "#f5f5f5"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(columns = p.value, rows = p.value <= 0.05)
+  ) |>
+  tab_header(
+    title = html("Generalized Linear Model Results - Vδ2 T Cells"),
+    subtitle = md("Marker ~ Infant Sex + HIV/ART Exposure <br> Separate models for each dependent variable"
+  )) |>
+  tab_footnote(footnote = "***p < 0.001; **p < 0.01; *p < 0.05",
+    locations = cells_column_labels(columns = significance))
+
+Model
+```
+
+```{r}
+# Simpler GLM + MAITs in Table
+library(stringr)
+
+Data <- Vd2
+
+Data$ptype <- factor(Data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+TheMarkers <- c("NKG2D", "CD8", "CD45RA", "CD62L", "CD25")
+Dataset <- map(.x=TheMarkers, .f=TheGLM, Data=Data) |> bind_rows()
+
+Dataset <- Dataset |>mutate(term = case_when(
+      term == "infant_sexMale" ~ "Sex: Male",
+      str_starts(term, "ptype") ~ str_replace(term, "ptype", "Exposure: "),
+      term == "(Intercept)" ~ "Intercept",
+      TRUE ~ term)
+  )
+
+Data <- MAIT
+
+Data$ptype <- factor(Data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+TheMarkers <- c("PD1")
+MAITDataset <- map(.x=TheMarkers, .f=TheGLM, Data=Data) |> bind_rows()
+
+MAITDataset <- MAITDataset |>mutate(term = case_when(
+      term == "infant_sexMale" ~ "Sex: Male",
+      str_starts(term, "ptype") ~ str_replace(term, "ptype", "Exposure: "),
+      term == "(Intercept)" ~ "Intercept",
+      TRUE ~ term)
+  )
+
+Dataset <- Dataset |> mutate(CellType = "Vδ2")
+MAITDataset <- MAITDataset |> mutate(CellType = "MAIT")
+CombinedDataset <- bind_rows(Dataset, MAITDataset) |>
+  mutate(CellType = factor(CellType, levels = c("Vδ2", "MAIT")))
+
+Model <- CombinedDataset |> select(CellType, Tested, term, estimate, std.error, statistic, p.value, OR_CI, significance) |>
+  gt(groupname_col = "CellType") |> 
+  cols_label(
+    term = "Predictor",
+    estimate = "OR",
+    std.error = "SE",
+    statistic = "z-value",
+    p.value = "p-value",
+    OR_CI = "OR [95% CI]",
+    significance = ""
+  ) |> fmt_number(columns = c(estimate, std.error, statistic), decimals = 2) |>
+    tab_options(
+    row_group.as_column = TRUE,
+    row_group.background.color = "#f5f5f5",
+    row_group.font.weight = "bold"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(columns = p.value, rows = p.value <= 0.05)
+  ) |>
+  tab_header(
+    title = html("Generalized Linear Model Results"),
+    subtitle = md("Marker ~ Infant Sex + HIV/ART Exposure <br> Separate models for each dependent variable"
+  )) |>
+  tab_footnote(footnote = "***p < 0.001; **p < 0.01; *p < 0.05",
+    locations = cells_column_labels(columns = significance))
+
+Model
+```
+
+```{r}
+Bolded <- Model |> opt_table_font(font = "Montserrat")
+
+Bolded <- Bolded |> opt_table_outline(style="solid", width=px(1), color="black") |> tab_options(column_labels.border.top.style = "solid",
+  column_labels.border.top.width = px(2), column_labels.border.top.color = "black", table.border.bottom.style = "double", table.border.bottom.width = px(2),
+  table.border.bottom.color = "black")
+
+FinalStorage <- file.path(StorageLocation, "SupplementalFigure3.html")
+gtsave(Bolded, FinalStorage)
+
+FinalStorage <- file.path(StorageLocation, "SupplementalFigure3.docx")
+gtsave(Bolded, FinalStorage)
+```
+
+```{r}
+#| eval: false
+
+# Evaluation with an Interaction Term
+
+library(stringr)
+
+Data <- Vd2
+
+Data$ptype <- factor(Data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+TheMarkers <- c("NKG2D", "CD8", "CD45RA", "CD62L", "CD25")
+Dataset <- map(.x=TheMarkers, .f=TheGLM2, Data=Data) |> bind_rows()
+
+Dataset <- Dataset |>mutate(term = case_when(
+      term == "infant_sexMale" ~ "Sex: Male",
+      str_starts(term, "ptype") ~ str_replace(term, "ptype", "Exposure: "),
+      term == "(Intercept)" ~ "Intercept",
+      TRUE ~ term)
+  )
+
+Model <- Dataset |> select(Tested, term, estimate, std.error, statistic, p.value, OR_CI, significance) |>
+  gt(groupname_col = "Tested") |>
+
+  cols_label(
+    term = "Predictor",
+    estimate = "OR",
+    std.error = "SE",
+    statistic = "z-value",
+    p.value = "p-value",
+    OR_CI = "OR [95% CI]",
+    significance = ""
+  ) |> fmt_number(columns = c(estimate, std.error, statistic), decimals = 2) |>
+    tab_options(
+    row_group.as_column = TRUE,
+    row_group.background.color = "#f5f5f5"
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_body(columns = p.value, rows = p.value <= 0.05)
+  ) |>
+  tab_header(
+    title = html("Generalized Linear Model Results - Vδ2 T Cells"),
+    subtitle = md("Marker ~ Infant Sex + HIV/ART Exposure <br> Separate models for each dependent variable"
+  )) |>
+  tab_footnote(footnote = "***p < 0.001; **p < 0.01; *p < 0.05",
+    locations = cells_column_labels(columns = significance))
+
+Model
+```

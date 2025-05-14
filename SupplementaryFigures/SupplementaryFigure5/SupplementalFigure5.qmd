@@ -1,0 +1,10 @@
+---
+title: "Supplemental Figure 5"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 5: Different visualization algorithms identify comparable ILT clusters** The results of multiple visualization algorithms are shown side by side, with the same ILT cell gates (manually drawn in concatenated ILT files) overlaid on the different maps. (A) PaCMAP, (B) UMAP, (C) tSNE, (D) and PHATE results are shown for unstimulated (top) and PMA+ionomycin stimulated ILT.
+
+# Code

@@ -1,0 +1,70 @@
+---
+title: "Table 1"
+format: html
+---
+```{r}
+library(dplyr)
+#library(purrr)
+#library(stringr)
+library(lubridate)
+library(gtsummary)
+library(gt)
+```
+
+```{r}
+StorageLocation <- file.path("MainFigures", "Table1")
+Metadata <- read.csv("data/Metadata.csv", check.names=FALSE)
+```
+
+```{r}
+#| code-fold: true
+################
+# All Together #
+################
+SelectData <- Metadata %>% select(ptype, isc_p_age, screen_vl, del_vl, del_cd4, ellapsedTime, infant_sex, gestage_d1, isc_parity)
+SelectData$ellapsedTime <- lubridate::days(SelectData$ellapsedTime)
+SelectData$ellapsedTime <- lubridate::day(SelectData$ellapsedTime)
+
+SelectData$del_vl[SelectData$del_vl > 0] <- 1
+SelectData$isc_parity[SelectData$isc_parity > 1] <- "2+"
+SelectData$ptype <- factor(SelectData$ptype, levels = c("HU", "HEU-lo", "HEU-hi"))
+SelectData
+
+Table1 <- SelectData %>% tbl_summary(by = ptype,  
+                           label = c(isc_p_age ~ "Maternal Age (years)", 
+                                     ellapsedTime ~ "Days between screening and delivery", 
+                                     screen_vl ~ "Maternal viral load (screening)",  
+                                     del_vl ~ "Detectable viral load (delivery)", 
+                                     del_cd4 ~ md(paste0("Maternal CD4+ cells/", "\U00B5L", " (delivery)")), 
+                                     infant_sex ~ "Infant sex (female)",
+                                     gestage_d1 ~ "Estimated Gestational Age, weeks",
+                                     isc_parity ~ "Parity"),
+                            value = list(infant_sex ~ "Female"),
+                            missing = "no",
+                            missing_text = "NA",
+                           ) %>% modify_header(label ~ "**Demographics**") %>% modify_caption("**Cohort Characteristics**") 
+```
+
+```{r}
+#| label: tbl-demographics
+#| code-fold: true
+Table1
+```
+
+```{r}
+Bolded <- Table1 |> as_gt()
+
+#StorageLocation <- file.path(StorageLocation, "Table1.png")
+#TheGTTable |> gtsave(StorageLocation, vwidth = 1500, vheight = 1000)
+
+FinalStorage <- file.path(StorageLocation, "Table1.docx")
+gtsave(Bolded, FinalStorage)
+
+FinalStorage <- file.path(StorageLocation, "Table1.html")
+gtsave(Bolded, FinalStorage)
+```
+
+```{r}
+print("Done")
+```
+

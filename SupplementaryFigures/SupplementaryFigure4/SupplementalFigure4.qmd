@@ -1,0 +1,222 @@
+---
+title: "Supplemental Figure 4"
+format: docx
+---
+
+# Blurb
+
+**Supplemental Figure 4: Differentiation of Cord Blood ILTs** (A) The beeswarm plot displays the memory differentiation across ILT subsets, with each subset designated by a color and a symbol. Individual symbols represent the individual proportions of cells falling into each differentiation state listed on the x-axis. (B) The beeswarm plots compare the expression of specific markers in MAITs defined by either antibody (CD161^hi^ V⍺7.2+) or tetramer (CD161^hi^ hMR1 5-OP-RU+), designated by shape and color. (C) The beeswarm plots compare the expression of specific markers in NKTs identified by either antibody (V⍺24J⍺18+) or tetramer (hCD1d PBS-57+), designated by shape and color. Symbols represent individual values, boxplots depict medians and IQR, with whiskers showing the +/- 1.5 IQR range.
+
+# Code
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure4")
+```
+
+```{r}
+library(Coereba)
+library(purrr)
+library(dplyr)
+library(ggplot2)
+library(ggbeeswarm)
+library(ggtext)
+```
+
+```{r}
+#| code-fold: true
+shape_sex <- c("Female" = 22, "Male" = 21)
+fill_sex <- c("Female" = "white", "Male" = "black")
+
+shape_ptype <- c("HU" = 22, "HEU-lo" = 21, "HEU-hi" = 21)
+fill_ptype <- c("HU" = "white", "HEU-lo" = "darkgray", "HEU-hi" = "black")
+
+shape_art <- c("HU" = 22, "HEU" = 21)
+fill_art <- c("HU" = "white", "HEU" = "black")
+
+shape_viral <- c("NoViral" = 22, "Viral" = 21)
+fill_viral <- c("NoViral" = "white", "Viral" = "black")
+```
+
+```{r}
+data <- read.csv("data/ILTMemory.csv", check.names=FALSE)
+data <- data |> relocate(CellPop, .before=1)
+```
+
+```{r}
+#| eval: false
+#| echo: false
+
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+#table(data$ptype)
+#colnames(data)
+#str(data)
+
+data1 <- data |> dplyr::filter(CellPop %in% "Vd2")
+SummaryStats <- data1 |> filter(ptype %in% "HU")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[5:8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop", normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+data1 <- data |> dplyr::filter(CellPop %in% "MAITs")
+SummaryStats <- data1 |> filter(ptype %in% "HU")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[5:8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+data1 <- data |> dplyr::filter(CellPop %in% "NKTs")
+SummaryStats <- data1 |> filter(ptype %in% "HU")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[5:8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+ThePlots <- map(names(data1)[5:8], ~ Utility_Behemoth(data = data1, var = .x, myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, correction = "BH"))
+
+ThePlots[1]
+ThePlots[2]
+ThePlots[3]
+ThePlots[4]
+
+ThePlots <- map(names(data1)[5:8], ~ Utility_Behemoth(data = data1, var = .x, myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex, fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, correction = "BH"))
+
+ThePlots[1]
+ThePlots[2]
+ThePlots[3]
+ThePlots[4]
+```
+
+```{r}
+#data <- data |> dplyr::filter(ptype %in% "HU")
+colnames(data) <- gsub("Q1: ", "", gsub ("Q2: ", "", gsub("Q3: ", "", gsub("Q4: ", "", colnames(data)))))
+colnames(data) <- gsub(" , ", "", fixed=TRUE, colnames(data))
+Memory <- data |> tidyr::pivot_longer(cols=starts_with("CD27"), names_to="Category", values_to="Value")
+Memory$Category <- stringr::str_replace(Memory$Category, "(CD27)([+-])(CD45RA[+-])", "\\3\\1\\2")
+```
+
+```{r}
+PlotName <- "Memory_ILTs_Tetramer"
+
+Memory$CellPop |> unique()
+Memory$CellPop <- factor(Memory$CellPop, levels=c("Vd2", "MAITs", "NKTs"))
+Memory$Category <- factor(Memory$Category, levels=c("CD45RA+CD27+", "CD45RA-CD27-", "CD45RA-CD27+",
+"CD45RA+CD27-"))
+
+shape_ILTs <- c("Vd2" = 21, "MAITs" = 23, "NKTs"=22)
+fill_ILTs <- c("Vd2" = "red","MAITs" = "purple", "NKTs"="orange")
+
+plot <- ggplot(Memory, aes(x = Category, y = Value)) +
+    geom_boxplot(aes(group = interaction(Category, CellPop)), color = "black", fill = NA, outlier.shape = NA, position = position_dodge(width = 0.8)) + 
+     geom_beeswarm(aes(shape = CellPop, fill = CellPop), color="black", size = 2, 
+     alpha = 1, dodge.width = 0.8, corral.width=0.5, cex=0.2) + scale_shape_manual(values = shape_ILTs) + 
+     scale_fill_manual(values = fill_ILTs) + 
+    theme_bw() +
+    labs(y = NULL, title = NULL) +
+    theme(legend.position="none", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x=element_markdown(size = 11)) +
+    labs(y=element_blank(), x=element_blank())
+
+plot
+
+TheFileName <- paste0(PlotName, ".png")
+SendMeOnMyWay <- file.path(StorageLocation, TheFileName)
+ggsave(SendMeOnMyWay, plot, dpi = 600, units = "in", width = 10, height = 3)
+```
+
+# Marker Expression Comparison
+
+```{r}
+library(dplyr)
+library(Coereba)
+```
+
+```{r}
+data <- "data"
+
+MaitTet <- read.csv(file.path(data, "ILT_CtrlTetramer_MAITExpressionData.csv"),
+ check.names = FALSE)
+MaitTet <- MaitTet |> mutate(Condition = "Tetramer") |>
+    relocate(Condition, .before = "ptype")
+NKTTet <- read.csv(file.path(data, "ILT_CtrlTetramer_NKTExpressionData.csv"),
+ check.names = FALSE)
+NKTTet <- NKTTet |> mutate(Condition = "Tetramer") |>
+    relocate(Condition, .before = "ptype")
+
+MaitAb <- read.csv(file.path(data, "ILT_CtrlAntibody_MAITExpressionData.csv"),
+ check.names = FALSE)
+MaitAb <- MaitAb |> mutate(Condition = "Antibody") |>
+    relocate(Condition, .before = "ptype")
+NKTAb <- read.csv(file.path(data, "ILT_CtrlAntibody_NKTExpressionData.csv"),
+ check.names = FALSE)
+NKTAb <- NKTAb |> mutate(Condition = "Antibody") |>
+    relocate(Condition, .before = "ptype")
+```
+
+```{r}
+panel <- "data/ILT_Antibody_Panels.csv"
+StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure4")
+
+shape_condition <- c("Tetramer" = 23, "Antibody" = 23)
+fill_condition <- c("Tetramer" = "mediumorchid2", "Antibody" = "lightgreen")
+```
+
+# Supplemental Figure 4.B
+
+```{r}
+MAIT <- bind_rows(MaitTet, MaitAb)
+Data <- MAIT %>% select(-"hMR1", -"hCD1d", -"Va7.2", -"Va24Ja18", -"TNFa", -"IFNg", -"CD107a", -"CD161", -"CD69", -"CD3", -"Vd2", -"CD7")
+
+# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
+Data <- Data |> dplyr::select(-CCR7)
+```
+
+```{r}
+Data <- Data |> dplyr::select(-Viral, -artexposure, -screen_vl, -isc_artreg, -ART)
+
+XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA",
+                 "CD127", "CCR4", "CD25", "PD1", "CD38")
+
+Data1 <- Data #|> filter(ptype %in% "HU")
+
+Data1 <- Data1 |>  arrange(bid)
+
+Plot <- Utility_MarkerPlots(data=Data1, panel=panel, myfactor="Condition", shape_palette = shape_condition,
+                            fill_palette = fill_condition, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="MAIT_AbVsTetramer", corral.width=0.8)
+```
+
+# Supplemental Figure 4.C
+
+```{r}
+panel <- "data/ILT_Antibody_Panels.csv"
+StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure4")
+
+shape_condition <- c("Tetramer" = 22, "Antibody" = 22)
+fill_condition <- c("Tetramer" = "mediumorchid2", "Antibody" = "lightgreen")
+```
+
+```{r}
+NKT <- bind_rows(NKTTet, NKTAb)
+Data <- NKT %>% select(-"hMR1", -"hCD1d", -"Va7.2", -"Va24Ja18", -"TNFa", -"IFNg", -"CD107a", -"CD161", -"CD69", -"CD3", -"Vd2", -"CD7")
+
+# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
+Data <- Data |> dplyr::select(-CCR7)
+```
+
+```{r}
+Data <- Data |> dplyr::select(-Viral, -artexposure, -screen_vl, -isc_artreg, -ART)
+
+XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA",
+                 "CD127", "CCR4", "CD25", "PD1", "CD38")
+
+Data1 <- Data #|> filter(ptype %in% "HU")
+
+Data1 <- Data1 |>  arrange(bid)
+
+Plot <- Utility_MarkerPlots(data=Data1, panel=panel, myfactor="Condition", shape_palette = shape_condition,
+                            fill_palette = fill_condition, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="NKT_AbVsTetramer", corral.width=0.8)
+```
+
+```{r}
+print("Goodbye")
+```

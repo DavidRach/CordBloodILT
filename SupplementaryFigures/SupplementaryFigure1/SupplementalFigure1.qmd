@@ -1,0 +1,10 @@
+---
+title: "Supplemental Figure 1"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 1: Gating strategy for spectral flow cytometry (SFC) panel.** The dot plots illustrate the gating strategy used to identify the main ILT nodes for a representative HIV-unexposed (HU) infant, with descending hierarchial gates denoted by arrows. Individual gates and frequency in the parent gate are shown.
+
+# Code

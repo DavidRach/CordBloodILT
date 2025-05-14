@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<style>body{background-color:white;}</style>
+
+
+</head>
+<body>
+<div id="gpigihgagm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+  <style>#gpigihgagm table {
+  font-family: Montserrat, system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#gpigihgagm thead, #gpigihgagm tbody, #gpigihgagm tfoot, #gpigihgagm tr, #gpigihgagm td, #gpigihgagm th {
+  border-style: none;
+}
+
+#gpigihgagm p {
+  margin: 0;
+  padding: 0;
+}
+
+#gpigihgagm .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 22px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #000000;
+  border-bottom-style: double;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: solid;
+  border-left-width: 2px;
+  border-left-color: #000000;
+}
+
+#gpigihgagm .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gpigihgagm .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gpigihgagm .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gpigihgagm .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gpigihgagm .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gpigihgagm .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gpigihgagm .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gpigihgagm .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gpigihgagm .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#gpigihgagm .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gpigihgagm .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gpigihgagm .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gpigihgagm .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gpigihgagm .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gpigihgagm .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gpigihgagm .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gpigihgagm .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gpigihgagm .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#gpigihgagm .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gpigihgagm .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gpigihgagm .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gpigihgagm .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gpigihgagm .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gpigihgagm .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gpigihgagm .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gpigihgagm .gt_left {
+  text-align: left;
+}
+
+#gpigihgagm .gt_center {
+  text-align: center;
+}
+
+#gpigihgagm .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gpigihgagm .gt_font_normal {
+  font-weight: normal;
+}
+
+#gpigihgagm .gt_font_bold {
+  font-weight: bold;
+}
+
+#gpigihgagm .gt_font_italic {
+  font-style: italic;
+}
+
+#gpigihgagm .gt_super {
+  font-size: 65%;
+}
+
+#gpigihgagm .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#gpigihgagm .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gpigihgagm .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gpigihgagm .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gpigihgagm .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gpigihgagm .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gpigihgagm .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#gpigihgagm .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#gpigihgagm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+  <table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <thead>
+    <tr class="gt_heading">
+      <td colspan="9" class="gt_heading gt_title gt_font_normal gt_bottom_border" style><span class='gt_from_md'><strong>Supplemental Table 1: SFC Antibodies</strong></span></td>
+    </tr>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Marker">Marker</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Alternate.Name"><span class='gt_from_md'>Alternate<br>name</span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Clone">Clone</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Isotype">Isotype</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Fluorophore">Fluorophore</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Manufacturer">Manufacturer</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Catalog.Number"><span class='gt_from_md'>Catalog<br>number</span></th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Temperature">Temperature</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Location"><span class='gt_from_md'>Location<sup>†</sup></span><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="Marker" class="gt_row gt_center">CD62L</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">SK11</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2a, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV395</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">565219</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD8</td>
+<td headers="Alternate.Name" class="gt_row gt_center">CD8a</td>
+<td headers="Clone" class="gt_row gt_center">RPA-T8</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV496</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">612942</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD69</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">FN50</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV563</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">748764</td>
+<td headers="Temperature" class="gt_row gt_center">4°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD194</td>
+<td headers="Alternate.Name" class="gt_row gt_center">CCR4</td>
+<td headers="Clone" class="gt_row gt_center">1G1</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV615</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">613000</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">Vd2</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">B6</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV661</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">750056</td>
+<td headers="Temperature" class="gt_row gt_center">4°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD183</td>
+<td headers="Alternate.Name" class="gt_row gt_center">CXCR3</td>
+<td headers="Clone" class="gt_row gt_center">1C6/CXCR3</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV737</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">741866</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD4</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">SK3</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BUV805</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">612887</td>
+<td headers="Temperature" class="gt_row gt_center">37°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD127</td>
+<td headers="Alternate.Name" class="gt_row gt_center">IL-7Ra</td>
+<td headers="Clone" class="gt_row gt_center">A019D5</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV421</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">351310</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD14</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">M5E2</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2a, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">Pacific Blue</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">301828</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD19</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">SJ25C1</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">Pacific Blue</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">363036</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD161</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">HP-3G10</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV480</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">748279</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD45RA</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">HI100</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2b, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV510</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">304142</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD56</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">5.1H11</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV605</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">362538</td>
+<td headers="Temperature" class="gt_row gt_center">37°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD197</td>
+<td headers="Alternate.Name" class="gt_row gt_center">CCR7</td>
+<td headers="Clone" class="gt_row gt_center">G043H7</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2a, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV650</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">353234</td>
+<td headers="Temperature" class="gt_row gt_center">37°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD7</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">M-T701</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV711</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">564018</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">IFNg</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">B27</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV750</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">566357</td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Intracellular</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD196</td>
+<td headers="Alternate.Name" class="gt_row gt_center">CCR6</td>
+<td headers="Clone" class="gt_row gt_center">11A9</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">BV786</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">563704</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD3</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">SK7</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">Spark Blue 550</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">344852</td>
+<td headers="Temperature" class="gt_row gt_center">4°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">hCD1d PBS-57</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center"></td>
+<td headers="Isotype" class="gt_row gt_center">Tetramer</td>
+<td headers="Fluorophore" class="gt_row gt_center">Alexa Fluor 488</td>
+<td headers="Manufacturer" class="gt_row gt_center">NIH Tetramer Core</td>
+<td headers="Catalog.Number" class="gt_row gt_center"></td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">Va24Ja18</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">6B11</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">FITC </td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">342906</td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD314</td>
+<td headers="Alternate.Name" class="gt_row gt_center">NKG2D</td>
+<td headers="Clone" class="gt_row gt_center">1D11</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">PE</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">320806</td>
+<td headers="Temperature" class="gt_row gt_center">37°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD26</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">BA5b</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2a, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">PerCP-Cy5.5</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">302716</td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Intracellular</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD25</td>
+<td headers="Alternate.Name" class="gt_row gt_center">IL-2Ra</td>
+<td headers="Clone" class="gt_row gt_center">M-A251</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">PE-Cy5</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">555433</td>
+<td headers="Temperature" class="gt_row gt_center">37°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">TNFa</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">MAb11</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">PE-Dazzle 594</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">502946</td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Intracellular</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD279</td>
+<td headers="Alternate.Name" class="gt_row gt_center">PD1</td>
+<td headers="Clone" class="gt_row gt_center">PD1.3.1.3</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2b</td>
+<td headers="Fluorophore" class="gt_row gt_center">PE-Vio 770</td>
+<td headers="Manufacturer" class="gt_row gt_center">Miltenyi Biotec</td>
+<td headers="Catalog.Number" class="gt_row gt_center">130-117-698</td>
+<td headers="Temperature" class="gt_row gt_center">37°, RT</td>
+<td headers="Location" class="gt_row gt_center">Surface, IC</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD16</td>
+<td headers="Alternate.Name" class="gt_row gt_center">FcyRIII</td>
+<td headers="Clone" class="gt_row gt_center">3G8</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">APC</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">302012</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">hMR1 5-OP-RU</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center"></td>
+<td headers="Isotype" class="gt_row gt_center">Tetramer</td>
+<td headers="Fluorophore" class="gt_row gt_center">Alexa Fluor 647</td>
+<td headers="Manufacturer" class="gt_row gt_center">NIH Tetramer Core</td>
+<td headers="Catalog.Number" class="gt_row gt_center"></td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">Va7.2</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">3C10</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">Alexa Fluor 647</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">351726</td>
+<td headers="Temperature" class="gt_row gt_center">RT</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD107a</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">H4A3</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">APC-R700</td>
+<td headers="Manufacturer" class="gt_row gt_center">BD Biosciences</td>
+<td headers="Catalog.Number" class="gt_row gt_center">565184</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD27</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">O323</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">APC-Fire 750</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">302846</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD38</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">HIT2</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">APC-Fire 810</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">303550</td>
+<td headers="Temperature" class="gt_row gt_center">37°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD3</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">UCHT1</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG1, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">Alexa Fluor 647</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">300415</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+    <tr><td headers="Marker" class="gt_row gt_center">CD3</td>
+<td headers="Alternate.Name" class="gt_row gt_center"></td>
+<td headers="Clone" class="gt_row gt_center">OKT3</td>
+<td headers="Isotype" class="gt_row gt_center">Mouse IgG2a, k</td>
+<td headers="Fluorophore" class="gt_row gt_center">Alexa Fluor 647</td>
+<td headers="Manufacturer" class="gt_row gt_center">BioLegend</td>
+<td headers="Catalog.Number" class="gt_row gt_center">317312</td>
+<td headers="Temperature" class="gt_row gt_center">4°</td>
+<td headers="Location" class="gt_row gt_center">Surface</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="9">Last Updated: May 08, 2025</td>
+    </tr>
+  </tfoot>
+  <tfoot class="gt_footnotes">
+    <tr>
+      <td class="gt_footnote" colspan="9"><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span> † IC = Additionally added to intracellular mix</td>
+    </tr>
+  </tfoot>
+</table>
+</div>
+</body>
+</html>

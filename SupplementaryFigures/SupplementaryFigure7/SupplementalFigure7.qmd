@@ -1,0 +1,135 @@
+---
+title: "Supplementary Figure 7"
+format: html
+---
+
+# Blurb
+
+**Supplementary Figure 7: Marker Co-expression for V𝛿2 cells at baseline and after activation ex vivo** Manually gated V𝛿2 cells across all HIV-unexposed (HU) specimens were concatenated and marker co-expressions matrices were generated using CytoGLMM R package. The heatmap function indicates the extent of marker co-expression, ranging from low (blue) to high (red). (A) Marker co-expression plot for cord blood V𝛿2 cells at baseline. (B) Marker co-expression plot of cord blood V𝛿2 cells after activation with PMA+ionomycin.
+
+# Code
+
+## Tetramer
+
+```{r}
+library(feather)
+library(dplyr)
+library(CytoGLMM)
+library(ggcorrplot)
+```
+
+```{r}
+StorageLocation <- file.path("ExtraFigures", "CoexpressionPlots")
+
+Location <- file.path("data", "Feather")
+TheName <- "ILTsTetramerCtrl"
+TheFullName <- paste0(TheName, ".feather")
+FeatherOutpath <- file.path(Location, TheFullName)
+```
+
+```{r}
+Data <- feather::read_feather(FeatherOutpath)
+Panel <- read.csv("data/ILTPanelTetramer.csv", check.names = FALSE)
+ProteinNames <- c("CD16", "CD27", "CD38", "hCD1d", "hMR1", "CD62L","CD8", "CD69", "CCR4", "Vd2","CD4","CD127", "CD161", "CD45RA", "CD56", "CD7", "IFNg", "CCR6", "NKG2D", "CD25", "PD1", "CD26", "CD3")
+
+Vd2 = Data |> dplyr::filter(celltype == "Vd2")
+MAIT = Data |> dplyr::filter(celltype == "MAITs")
+NKT = Data |> dplyr::filter(celltype == "NKTs")
+```
+
+```{r}
+# eval: false
+AllNames <- ProteinNames[ProteinNames != "CD3"]
+AllNames <- AllNames[AllNames != "CD7"]
+AllNames <- AllNames[AllNames != "IFNg"]
+AllNames <- AllNames[AllNames != "CD69"]
+
+mcor = cor(Data |> dplyr::select(all_of(AllNames)))
+All <- ggcorrplot(mcor, hc.order = TRUE, type = "lower",
+           outline.col = "lightgray",
+           colors = c("#6D9EC1", "white", "#E46726"))
+
+CorrAll <- All + theme(axis.text.x = element_text(angle = 90, vjust = 1, size=8), axis.text.y = element_text(size=8))
+```
+
+```{r}
+Vd2Names <- ProteinNames[ProteinNames != "hMR1"]
+Vd2Names <- Vd2Names[Vd2Names != "hCD1d"]
+Vd2Names <- Vd2Names[Vd2Names != "CD7"]
+Vd2Names <- Vd2Names[Vd2Names != "CD3"]
+Vd2Names <- Vd2Names[Vd2Names != "Vd2"]
+Vd2Names <- Vd2Names[Vd2Names != "CD69"]
+Vd2Names <- Vd2Names[Vd2Names != "IFNg"]
+
+mcor = cor(Vd2 |> dplyr::select(all_of(Vd2Names)))
+Vd2 <- ggcorrplot(mcor, hc.order = TRUE, type = "lower",
+           outline.col = "lightgray",
+           colors = c("#6D9EC1", "white", "#E46726"))
+
+CorrVd2 <- Vd2 + theme(axis.text.x = element_text(angle = 90, vjust = 1, size=8), axis.text.y = element_text(size=8))
+
+AssembledName <- paste0("Vd2Correlation", "Tetramer.png")
+SendMeOnMyWay <- file.path(StorageLocation, AssembledName)
+ggsave(filename = SendMeOnMyWay, CorrVd2, dpi = 600, width = 6, height = 4)
+```
+
+## PMA
+
+```{r}
+library(feather)
+library(dplyr)
+library(CytoGLMM)
+library(ggcorrplot)
+```
+
+```{r}
+StorageLocation <- file.path("ExtraFigures", "CoexpressionPlots")
+
+Location <- file.path("data", "Feather")
+TheName <- "ILTsAntibodyPMA"
+TheFullName <- paste0(TheName, ".feather")
+FeatherOutpath <- file.path(Location, TheFullName)
+```
+
+```{r}
+Data <- feather::read_feather(FeatherOutpath)
+Panel <- read.csv("data/ILTPanelAntibody.csv", check.names = FALSE)
+ProteinNames <- c("CD16", "CD27", "CD38", "hCD1d", "hMR1", "CD62L","CD8", "CD69", "CCR4", "Vd2","CD4","CD127", "CD161", "CD45RA", "CD56", "CD7", "CD69", "TNFa", "IFNg", "CCR6", "NKG2D", "CD25", "PD1", "CD26", "CD3")
+
+Vd2 = Data |> dplyr::filter(celltype == "Vd2")
+MAIT = Data |> dplyr::filter(celltype == "MAITs")
+NKT = Data |> dplyr::filter(celltype == "NKTs")
+```
+
+```{r}
+# eval: false
+AllNames <- ProteinNames[ProteinNames != "CD16"]
+
+mcor = cor(Data |> dplyr::select(all_of(AllNames)))
+All <- ggcorrplot(mcor, hc.order = TRUE, type = "lower",
+           outline.col = "lightgray",
+           colors = c("#6D9EC1", "white", "#E46726"))
+
+CorrAll <- All + theme(axis.text.x = element_text(angle = 90, vjust = 1, size=8), axis.text.y = element_text(size=8))
+```
+
+```{r}
+Vd2Names <- ProteinNames[ProteinNames != "hMR1"]
+Vd2Names <- Vd2Names[Vd2Names != "hCD1d"]
+Vd2Names <- Vd2Names[Vd2Names != "CD7"]
+Vd2Names <- Vd2Names[Vd2Names != "CD3"]
+Vd2Names <- Vd2Names[Vd2Names != "Vd2"]
+Vd2Names <- Vd2Names[Vd2Names != "CD69"]
+Vd2Names <- Vd2Names[Vd2Names != "CD16"]
+
+mcor = cor(Vd2 |> dplyr::select(all_of(Vd2Names)))
+Vd2 <- ggcorrplot(mcor, hc.order = TRUE, type = "lower",
+           outline.col = "lightgray",
+           colors = c("#6D9EC1", "white", "#E46726"))
+
+CorrVd2 <- Vd2 + theme(axis.text.x = element_text(angle = 90, vjust = 1, size=8), axis.text.y = element_text(size=8))
+
+AssembledName <- paste0("Vd2Correlation", "PMAAntibody.png")
+SendMeOnMyWay <- file.path(StorageLocation, AssembledName)
+ggsave(filename = SendMeOnMyWay, CorrVd2, dpi = 600, width = 6, height = 4)
+```

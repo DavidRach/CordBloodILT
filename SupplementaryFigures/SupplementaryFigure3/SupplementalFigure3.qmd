@@ -1,0 +1,243 @@
+---
+title: "Supplemental Figure 3"
+format: docx
+---
+
+# Blurb
+
+**Supplemental Figure 3: Antibody and Tetramer-staining frequency of ILT subsets in HEU infants.** The beeswarm plots show the frequency of ILT subsets with individual symbols representing unique specimens, boxplots depicting median and IQR, with whiskers showing the +/- 1.5 IQR range. (A) Frequency of MAITs identified by antibody (CD161^hi^ V⍺7.2+, left) or tetramer (CD161^hi^ hMR1 5-OP-RU+, right). (B) Frequency of MAITs identified by antibody (CD161^hi^ V⍺7.2+, left) or tetramer (CD161^hi^ hMR1 5-OP-RU+, right) and pooled by HIV-exposure. (C) Frequency of NKTs identified by antibody (V⍺24J⍺18+, left) or tetramer (hCD1d PBS-57+, right) staining. (D) Frequency of NKTs pooled by identified by antibody (V⍺24J⍺18+, left) or tetramer (hCD1d PBS-57+, right) staining and pooled by HIV-exposure.
+
+# Code
+
+```{r}
+library(Coereba)
+library(dplyr)
+library(purrr)
+library(ggplot2)
+```
+
+```{r}
+#| code-fold: true
+shape_sex <- c("Female" = 22, "Male" = 21)
+fill_sex <- c("Female" = "white", "Male" = "black")
+
+shape_ptype <- c("HU" = 22, "HEU-lo" = 21, "HEU-hi" = 21)
+fill_ptype <- c("HU" = "white", "HEU-lo" = "darkgray", "HEU-hi" = "black")
+
+shape_art <- c("HU" = 22, "HEU" = 21)
+fill_art <- c("HU" = "white", "HEU" = "black")
+
+shape_viral <- c("NoViral" = 22, "Viral" = 21)
+fill_viral <- c("NoViral" = "white", "Viral" = "black")
+```
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure3")
+
+AntibodyData <- read.csv("data/SFC_Ctrl_Antibody_Freq.csv", check.names=FALSE)
+AntibodyData$ptype <- factor(AntibodyData$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+AntibodyData <- AntibodyData |> mutate(
+    ART = case_when(
+      ptype == "HU" ~ "HU",
+      ptype == "HEU-lo" ~ "HEU",
+      ptype == "HEU-hi" ~ "HEU",
+      TRUE ~ NA_character_
+    )
+  )
+AntibodyData$ART <- factor(AntibodyData$ART, levels=c("HU", "HEU"))
+
+TetramerData <- read.csv("data/SFC_Ctrl_Tetramer_Freq.csv", check.names=FALSE)
+TetramerData$ptype <- factor(TetramerData$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+TetramerData <- TetramerData |> mutate(
+    ART = case_when(
+      ptype == "HU" ~ "HU",
+      ptype == "HEU-lo" ~ "HEU",
+      ptype == "HEU-hi" ~ "HEU",
+      TRUE ~ NA_character_
+    )
+  )
+TetramerData$ART <- factor(TetramerData$ART, levels=c("HU", "HEU"))
+```
+
+## Figure A.I
+
+```{r}
+data <- AntibodyData
+PlotName <- "MAITFreqAntibody"
+
+ThePlot <- map(names(data)[10], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, statsHeight=0.25, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) + lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure A.II
+
+```{r}
+data <- TetramerData
+PlotName <- "MAITFreqTetramer"
+
+ThePlot <- map(names(data)[10], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, statLines=TRUE, statsHeight=0.3, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure B.I
+
+```{r}
+data <- AntibodyData
+PlotName <- "MAITFreqAntibody"
+
+ThePlot <- map(names(data)[10], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ART", normality = "dagostino", shape_palette = shape_art, fill_palette = fill_art, cex = 2, size = 3, corral.width = 1, statLine = TRUE, statsHeight=0.25, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) + lims(y=c(0,NA))
+
+Plot <- Plot + scale_x_discrete(labels=c("HU"="HU", "HEU"="All HEU"))
+
+Abbreviation <- "_Pooled.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure B.II
+
+```{r}
+data <- TetramerData
+PlotName <- "MAITFreqTetramer"
+
+ThePlot <- map(names(data)[10], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ART", normality = "dagostino", shape_palette = shape_art, fill_palette = fill_art, cex = 2, size = 3, corral.width = 1, statLine = TRUE, statsHeight=0.3, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot <- Plot + scale_x_discrete(labels=c("HU"="HU", "HEU"="All HEU"))
+
+Plot
+
+Abbreviation <- "_Pooled.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure C.I
+
+```{r}
+data <- AntibodyData
+PlotName <- "NKTFreqAntibody"
+
+ThePlot <- map(names(data)[11], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, statsHeight=0.3, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure C.II
+
+```{r}
+data <- TetramerData
+PlotName <- "NKTFreqTetramer"
+
+ThePlot <- map(names(data)[11], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, statsHeight=0.3, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure D.I
+
+```{r}
+data <- AntibodyData
+PlotName <- "NKTFreqAntibody"
+
+ThePlot <- map(names(data)[11], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ART", normality = "dagostino", shape_palette = shape_art, fill_palette = fill_art, cex = 2, size = 3, corral.width = 1, statLine = TRUE, statsHeight=0.3, correction = "BH", keepNS=FALSE, showClose = FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot <- Plot + scale_x_discrete(labels=c("HU"="HU", "HEU"="All HEU"))
+
+Plot
+
+Abbreviation <- "_Pooled.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure D.II
+
+```{r}
+data <- TetramerData
+PlotName <- "NKTFreqTetramer"
+
+ThePlot <- map(names(data)[11], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ART", normality = "dagostino", shape_palette = shape_art, fill_palette = fill_art, cex = 2, size = 3, corral.width = 1, statLine = TRUE, statsHeight=0.3, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) + lims(y=c(0,NA))
+
+Plot <- Plot + scale_x_discrete(labels=c("HU"="HU", "HEU"="All HEU"))
+
+Plot
+
+Abbreviation <- "_Pooled.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure E.I
+
+```{r}
+data <- AntibodyData
+PlotName <- "Vd2FreqAntibody"
+
+ThePlot <- map(names(data)[12], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, statsHeight=2.5, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) + lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure E.II
+
+```{r}
+print("Goodbye")
+```

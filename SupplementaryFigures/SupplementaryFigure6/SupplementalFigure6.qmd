@@ -1,0 +1,10 @@
+---
+title: "Supplemental Figure 6"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 6: Heatmap visualization for individual markers at baseline** Each plot in the grid shows the expression individual markers by heat indexing on the basis of median fluorescent intensity (MFI) for PaCMAP generated ILT subsets in a concatenated file, including V𝛿2 cells and tetramer identified MAITs and NKTs at baseline. Scale: green=low, red=high.
+
+# Code

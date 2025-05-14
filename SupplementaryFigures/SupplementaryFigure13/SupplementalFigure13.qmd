@@ -1,0 +1,310 @@
+---
+title: "Supplementary Figure 13"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 13: Sex-based differences in ILT marker expression.** (A) The beeswarm plots display the frequency of differentially expressed markers in the ILT clusters identified in Figure 1.C. Symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify infant sex. (A) displays differential PD1 expression in MAITS, (B) differential NKG2D expression in NKTs, (C), (D), and (E) depict differentially expressed markers in CD4+, CD8+ and CD4-CD8- (DN) V𝛿2 cell clusters respectively.
+
+# Code
+
+```{r}
+library(purrr)
+library(Coereba)
+library(ggplot2)
+```
+
+```{r}
+#| code-fold: true
+shape_sex <- c("Female" = 22, "Male" = 21)
+fill_sex <- c("Female" = "white", "Male" = "black")
+
+shape_ptype <- c("HU" = 22, "HEU-lo" = 21, "HEU-hi" = 21)
+fill_ptype <- c("HU" = "white", "HEU-lo" = "darkgray", "HEU-hi" = "black")
+
+shape_art <- c("HU" = 22, "HEU" = 21)
+fill_art <- c("HU" = "white", "HEU" = "black")
+
+shape_viral <- c("NoViral" = 22, "Viral" = 21)
+fill_viral <- c("NoViral" = "white", "Viral" = "black")
+```
+
+## MAITs
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
+data <- read.csv("data/MAIT_TetIsland_ExpressionData.csv")
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+```
+
+### Figure A
+
+```{r}
+PlotName <- "MAIT_TetLocal_PD1"
+
+ThePlot <- map(names(data)[34], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## NKTs
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
+data <- read.csv("data/NKT_TetIsland_ExpressionData.csv")
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+```
+
+```{r}
+PlotName <- "NKT_TetLocal_NKG2D"
+
+ThePlot <- map(names(data)[31], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=1, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+### Figure B
+
+## CD4 Vd2s
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
+data <- read.csv("data/Vd2CD4_TetIsland_ExpressionData.csv")
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+```
+
+### Figure C.I
+
+```{r}
+PlotName <- "Vd2CD4_TetLocal_NKG2D"
+
+ThePlot <- map(names(data)[31], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+### Figure C.II
+
+```{r}
+PlotName <- "Vd2CD4_TetLocal_PD1"
+
+ThePlot <- map(names(data)[34], ~ Utility_Behemoth(data = data, var = .x, 
+myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+ fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1,statsHeight=1, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## DN Vd2s
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
+data <- read.csv("data/Vd2DN_TetIsland_ExpressionData.csv")
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+```
+
+### Figure D.I
+
+```{r}
+PlotName <- "Vd2DN_TetLocal_NKG2D"
+
+ThePlot <- map(names(data)[31], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+### Figure D.II
+
+```{r}
+PlotName <- "Vd2DN_TetLocal_PD1"
+
+ThePlot <- map(names(data)[34], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+### Figure D.III
+
+```{r}
+PlotName <- "Vd2DN_TetLocal_CD62L"
+
+ThePlot <- map(names(data)[16], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## CD8 Vd2s
+
+```{r}
+StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
+data <- read.csv("data/Vd2CD8_TetIsland_ExpressionData.csv")
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+```
+
+### Figure E.I
+
+```{r}
+PlotName <- "Vd2CD8_TetLocal_CD38"
+
+ThePlot <- map(names(data)[12], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=1, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15), 
+      axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+### Figure E.II
+
+```{r}
+PlotName <- "Vd2CD8_TetLocal_CD56"
+
+ThePlot <- map(names(data)[26], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+### Figure E.III
+
+```{r}
+PlotName <- "Vd2CD8_TetLocal_CD62L"
+
+ThePlot <- map(names(data)[16], ~ Utility_Behemoth(data = data, var = .x,
+ myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
+  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_sex.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+```{r}
+print("Goodbye")
+```

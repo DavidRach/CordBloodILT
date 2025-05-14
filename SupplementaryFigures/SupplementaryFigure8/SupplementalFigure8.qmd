@@ -1,0 +1,10 @@
+---
+title: "Supplementary Figure 8"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 8: Heatmap visualization for individual markers following polyclonal stimulation.** Each plot in the grid shows the expression of individual markers by heat indexing on the basis of median fluorescent intensity (MFI) for PaCMAP generated ILT subsets in a concatenated file including V𝛿2 cells and antibody identified MAITs and NKTs. Scale: green=low, red=high.
+
+# Code

@@ -1,0 +1,157 @@
+---
+title: "Figure 10"
+format: docx
+---
+
+# Blurb
+
+**Figure 10: Lower cytokine production following restimulation in HEU infants.** Expanded V𝛿2 T cells were restimulated with plate-bound ⍺-𝛾𝛿 TCR antibody after 17-days in culture. (A) The heatmap summarizes cytokine production and degranulation of V𝛿2 T cells by culture condition. The 50th percentile of the distribution of median frequencies of cells positive for each marker is displayed by a combination of colors and symbols. (B) The beeswarm plots compare between exposure groups the cytokine production by BCG-expanded V𝛿2 T cells in response to restimulation for the frequency of TNF⍺+ (upper), IFN𝛾+(middle), and polyfunctional TNF⍺+ IFN𝛾+ (lower). The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
+
+# Code
+
+```{r}
+library(purrr)
+library(Coereba)
+library(ggplot2)
+library(gt)
+```
+
+```{r}
+#| code-fold: true
+shape_sex <- c("Female" = 22, "Male" = 21)
+fill_sex <- c("Female" = "white", "Male" = "black")
+
+shape_ptype <- c("HU" = 22, "HEU-lo" = 21, "HEU-hi" = 21)
+fill_ptype <- c("HU" = "white", "HEU-lo" = "darkgray", "HEU-hi" = "black")
+
+shape_art <- c("HU" = 22, "HEU" = 21)
+fill_art <- c("HU" = "white", "HEU" = "black")
+
+shape_viral <- c("NoViral" = 22, "Viral" = 21)
+fill_viral <- c("NoViral" = "white", "Viral" = "black")
+```
+
+## Figure A
+
+```{r}
+StorageLocation <- file.path("MainFigures/Figure10")
+data <- read.csv("data/gd_D17Cytokine_HeatmapData.csv")
+
+RemoveMarkers <- c("Vd2")
+MarkerOrder <- c("CD45RO", "CD27", "PD1", "CD56", "TNFa", "IFNg", "CD107a")
+
+Table <- Coereba:::Coereba_Heatmap(data=TheHeatmap, RemoveMarkers=RemoveMarkers, MarkerOrder=MarkerOrder)
+```
+
+```{r}
+Greeked <- Table |>
+  sub_values(pattern="Vd2", replacement = "V\u03B42") |>
+  sub_values(pattern="TNFa", replacement = "TNF\u03B1") |> 
+  sub_values(pattern="IFNg", replacement = "IFN\u03B3") |>
+  sub_values(pattern="Va7.2", replacement = "V\u03B17.2") |> 
+  sub_values(pattern="Va24Ja18", replacement = "V\u03B124J\u03B118")
+
+Greeked <- Greeked |> opt_table_outline(style="solid", width=px(2), color="black") |>
+  tab_options(column_labels.border.top.style = "solid", column_labels.border.top.width = px(2),
+              column_labels.border.top.color = "black", table.border.bottom.style = "double",
+              table.border.bottom.width = px(2), table.border.bottom.color = "black", 
+              table.font.size = 22)
+```
+
+```{r}
+filename <- "D17_Cytokine.png"
+StorageLocation <- file.path(StorageLocation, filename)
+Greeked |> gtsave(StorageLocation, vwidth = 1500, vheight = 1000)
+```
+
+## Figure B.I
+
+```{r}
+StorageLocation <- file.path("MainFigures/Figure10")
+data <- read.csv("data/D17CKBCG_ExpressionData.csv")
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+
+data <- data %>% dplyr::filter(!bid %in% "INF182") # Quality Disqual
+```
+
+```{r}
+PlotName <- "D17CK_BCG_TNFa"
+
+ThePlot <- map(names(data)[14], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 2, size = 3, corral.width = 1, statLines = TRUE, statsHeight=0.8, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+   theme(plot.caption = element_blank(),
+    axis.text.y = element_text(size = 15),
+     axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure B.II
+
+```{r}
+PlotName <- "D17CK_BCG_IFNg"
+
+ThePlot <- map(names(data)[15], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 2, size = 3, corral.width = 1, statLines = TRUE, statsHeight=0.8, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+   theme(plot.caption = element_blank(),
+    axis.text.y = element_text(size = 15),
+     axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure B.III
+
+```{r}
+StorageLocation <- file.path("MainFigures/Figure10")
+data <- read.csv("data/CytokinesD17.csv", check.names=FALSE)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+
+data <- data %>% dplyr::filter(!bid %in% "INF182") # Quality Disqual
+data
+```
+
+```{r}
+PlotName <- "D17CK_BCG_TNFaIFNg"
+
+ThePlot <- map(names(data)[10], ~ Utility_Behemoth(data = data, var = .x, myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 2, size = 3, corral.width = 1, statLines = TRUE, statsHeight=0.8, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
+   theme(plot.caption = element_blank(),
+    axis.text.y = element_text(size = 15),
+     axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+```{r}
+print("Goodbye")
+```

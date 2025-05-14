@@ -1,0 +1,72 @@
+---
+title: "Supplementary Figure 11"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 11: Marker expression profiles of resting cord blood V𝛿2 cells post-expansion.** Thawed PBMC were stimulated with Zoledronate and IL-2, BCG and IL-2, or IL-2 alone, and expanded in vitro for 17 days. The beeswarm plots show the proportion of cord blood V𝛿2 cells expressing individual markers listed on the x-axis after treatment with (A) IL-2 alone, (B) IL-2 and Zoledronate, and (C) IL-2 and BCG. The symbols show individual values, boxplots show median with IQR, and whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
+
+# Code
+
+```{r}
+StorageLocation <- file.path("ExtraFigures", "MarkerExpression_D17PhenotypePtype")
+panel <- file.path("data", "D17PhenotypePanel.csv")
+```
+
+```{r}
+#| code-fold: true
+library(Coereba)
+
+shape_sex <- c("Female" = 22, "Male" = 21)
+fill_sex <- c("Female" = "white", "Male" = "black")
+
+shape_ptype <- c("HU" = 22, "HEU-lo" = 21, "HEU-hi" = 21)
+fill_ptype <- c("HU" = "white", "HEU-lo" = "darkgray", "HEU-hi" = "black")
+
+shape_art <- c("HU" = 22, "HEU" = 21)
+fill_art <- c("HU" = "white", "HEU" = "black")
+
+shape_viral <- c("NoViral" = 22, "Viral" = 21)
+fill_viral <- c("NoViral" = "white", "Viral" = "black")
+```
+
+```{r}
+XAxisLevels <- c("CD45RA", "CD27", "PD1", "CD56", "CD16", "NKG2D", "NKG2A", "Perforin", "CD28", "CD25")
+```
+
+## Figure A
+
+```{r}
+File <- file.path("data", "gd_CFC_D17Phenotype_IL2ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="D17Phenotype_IL2_ptype", corral.width=0.8)
+```
+
+## Figure B
+
+```{r}
+File <- file.path("data", "gd_CFC_D17Phenotype_ZOLExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="D17Phenotype_ZOL_ptype", corral.width=0.8)
+```
+
+## Figure C
+
+```{r}
+File <- file.path("data", "gd_CFC_D17Phenotype_BCGExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="D17Phenotype_BCG_ptype", corral.width=0.8)
+```

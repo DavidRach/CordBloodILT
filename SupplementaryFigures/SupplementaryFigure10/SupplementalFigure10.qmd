@@ -1,0 +1,10 @@
+---
+title: "Supplementary Figure 10"
+format: docx
+---
+
+# Blurb
+
+**Supplementary Figure 10: Gating strategy for cultured day 17 conventional flow cytometry (CFC) panel.** The dot plots illustrate the gating strategy used to identify expanded V𝛿2 cells (D17) for a representative HU infant specimen, with descending hierarchical gates denoted by arrows. Individual gates and frequency in the parent gate are shown.
+
+# Code

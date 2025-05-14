@@ -1,0 +1,123 @@
+---
+title: "Figure 1"
+format: docx
+---
+
+# Blurb
+
+**Figure 1: Baseline heterogeneity of cord blood Innate-like T cells (ILT)** Thawed CBMC were stained with a panel of 29 mAbs after a 6 hour incubation at 37\*C in the presence of golgi inhibitors. (A) Dotplots of a representative specimen obtained from an unexposed (HU) infant, show the expression of CD45RA and CD27 for V𝛿2 T cells (top), MAITs (middle), and NKTs (bottom). (B) The beeswarm plots display the frequency of ILT subsets with individual symbols representing unique HIV unexposed (HU) study participants, boxplots depicting median and IQR, with whiskers showing the +/- 1.5 IQR range. (C) A PaCMAP dimensionality reduction plot is used to visualize ILT subsets in a concatenated file, including NKT and MAITs as identified by tetramer staining; the gates are based on density-distribution and marker expression, with color code and cell counts included in the legend. (D) The heatmap summarizes marker expression for ILT islands from the PaCMAP in C. The 50th percentile of the distribution of median frequencies of cells positive for each marker is displayed by a combination of colors and symbols.
+
+# Code
+
+```{r}
+library(Coereba)
+library(gt)
+library(purrr)
+library(ggplot2)
+library(dplyr)
+```
+
+## Figure B
+
+```{r}
+StorageLocation <- file.path("MainFigures", "Figure1")
+Data <- read.csv("data/SFC_Ctrl_Antibody_Freq.csv")
+Data <- Data |> dplyr::filter(ptype == "HU")
+
+Longer <- Data |> tidyr::pivot_longer(c("MAIT_Ratio", "NKT_Ratio", "Vd2_Ratio"))
+Longer$name <- gsub("_Ratio", "", Longer$name)
+```
+
+```{r}
+shape_ILTs <- c("Vd2" = 21, "MAITs" = 23, "NKTs"=22)
+fill_ILTs <- c("Vd2" = "red","MAITs" = "purple", "NKTs"="orange")
+```
+
+```{r}
+PlotName <- "ILTFrequencies"
+
+Longer$name <- gsub("MAIT", "MAITs", gsub("NKT", "NKTs", Longer$name))
+
+Longer$name <- factor(Longer$name, levels=c("Vd2", "MAITs", "NKTs"))
+
+SummaryStats <- Longer |> filter(name %in% "Vd2")
+Utility_Stats(data = SummaryStats, var = "value", myfactor = "ptype", normality = "dagostino", correction = "BH", returnType = "median")
+
+SummaryStats <- Longer |> filter(name %in% "MAITs")
+Utility_Stats(data = SummaryStats, var = "value", myfactor = "ptype", normality = "dagostino", correction = "BH", returnType = "median")
+
+SummaryStats <- Longer |> filter(name %in% "NKTs")
+Utility_Stats(data = SummaryStats, var = "value", myfactor = "ptype", normality = "dagostino", correction = "BH", returnType = "median")
+
+Utility_Stats(data = Longer, var = "MAITs", myfactor = "ptype", normality = "dagostino", correction = "BH", returnType = "median")
+
+Utility_Stats(data = Longer, var = "NKTs", myfactor = "ptype", normality = "dagostino", correction = "BH", returnType = "median")
+
+ThePlot <- purrr::map(names(Longer)[11], ~ Utility_Behemoth(data = Longer, var = .x, myfactor = "name", normality = "dagostino", shape_palette = shape_ILTs, fill_palette = fill_ILTs, cex = 2, size = 3, corral.width = 1, statLines=FALSE, statsHeight=100.0, correction = "BH"))
+
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15)) + lims(y=c(0,NA)) +
+   scale_x_discrete(labels = function(y) {
+    ifelse(y == "Vd2", expression(V * delta * " " * 2 * s),
+                                       as.character(y))
+  })
+
+Plot
+
+Abbreviation <- "_Antibody.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure D
+
+```{r}
+StorageLocation <- file.path("MainFigures", "Figure1")
+data <- file.path("data", "ILT_TetIsland_HeatmapData.csv")
+data <- read.csv(data, check.names=TRUE)
+```
+
+```{r}
+RemoveMarkers <- c("DumpChannel", "Viability", "CXCR3", "TNFa", "IFNg", "CD69", "CD107a", "CCR7")
+MarkerOrder <- c("CD7", "CD3", "Vd2", "hMR1", "hCD1d", "CD8", "CD4", "CD26", "CCR6", "CD161",
+                 "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA", "CD127", "CD25", "CCR4",
+                 "PD1", "CD38")
+
+Table <- Coereba:::Coereba_Heatmap(data=data, RemoveMarkers=RemoveMarkers, MarkerOrder=MarkerOrder)
+```
+
+```{r}
+Bolded <- Table |> 
+  cols_label(Vd2_CD4 ~ md('**V&delta;2<br>CD4**')) |>
+  cols_label(Vd2_CD8 ~ md('**V&delta;2<br>CD8**')) |> 
+  cols_label(Vd2_DN ~ md('**V&delta;2<br>DN**')) |>
+  cols_label(Vd2_T17 ~ md('**V&delta;2<br>T17**')) |> 
+  cols_label(Vd2_PD1 ~ md('**V&delta;2<br>PD1**')) |>
+  cols_label(Marker ~ md('**Marker<br>**')) |> 
+  cols_label(MAITs ~ md('**MAITs<br>**')) |>
+  cols_label(NKTs ~ md('**NKTs<br>**'))
+
+Greeked <- Bolded |>
+  sub_values(pattern="Vd2", replacement = "V\u03B42") |>
+  sub_values(pattern="TNFa", replacement = "TNF\u03B1") |> 
+  sub_values(pattern="IFNg", replacement = "IFN\u03B3") |>
+  sub_values(pattern="hMR1", replacement = "V\u03B17.2") |> 
+  sub_values(pattern="hCD1d", replacement = "V\u03B124J\u03B118")
+
+Greeked <- Greeked |> opt_table_outline(style="solid", width=px(2), color="black") |>
+  tab_options(column_labels.border.top.style = "solid", column_labels.border.top.width = px(2),
+              column_labels.border.top.color = "black", table.border.bottom.style = "double",
+              table.border.bottom.width = px(2), table.border.bottom.color = "black", 
+              table.font.size = 22)
+```
+
+```{r}
+filename <- "ILT_Tet_Heatmap.png"
+StorageLocation <- file.path(StorageLocation, filename)
+Greeked |> gtsave(StorageLocation, vwidth = 1500, vheight = 1000)
+```
+
+```{r}
+print("Goodbye")
+```
