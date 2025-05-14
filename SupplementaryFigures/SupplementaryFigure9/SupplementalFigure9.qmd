@@ -35,7 +35,7 @@ fill_viral <- c("NoViral" = "white", "Viral" = "black")
 ### Figure A.I
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure9")
+StorageLocation <- file.path("SupplementaryFigures/SupplementaryFigure9")
 data <- read.csv("data/ILT_CtrlTetramer_MAITExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -64,7 +64,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ### Figure A.II
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure9")
 data <- read.csv("data/ILT_CtrlAntibody_MAITExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -95,7 +94,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ### Figure B.I
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure9")
 data <- read.csv("data/ILT_CtrlTetramer_NKTExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -125,7 +123,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ### Figure B.II
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure9")
 data <- read.csv("data/ILT_CtrlAntibody_NKTExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -155,7 +152,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ### Figure C
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure9")
 data <- read.csv("data/ILT_PMAAntibody_Vd2ExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))

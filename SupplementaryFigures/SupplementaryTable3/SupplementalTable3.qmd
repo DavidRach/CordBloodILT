@@ -16,8 +16,9 @@ library(tidyr)
 library(purrr)
 library(broom)
 library(gt)
+library(stringr)
 
-StorageLocation <- file.path("SupplementalFigures/SupplementalTable3")
+StorageLocation <- file.path("SupplementaryFigures/SupplementaryTable3")
 ```
 
 ```{r}
@@ -27,6 +28,8 @@ NKT <- read.csv("data/ILT_CtrlTetramer_NKTExpressionData.csv", check.names=FALSE
 ```
 
 ```{r}
+
+Data <- Vd2
 #augment(model2)
 #glance(model2)
 
@@ -242,4 +245,8 @@ Model <- Dataset |> select(Tested, term, estimate, std.error, statistic, p.value
     locations = cells_column_labels(columns = significance))
 
 Model
+```
+
+```{r}
+print("GoodBye")
 ```

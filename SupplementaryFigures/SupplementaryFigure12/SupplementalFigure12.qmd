@@ -10,7 +10,7 @@ format: docx
 # Code
 
 ```{r}
-StorageLocation <- file.path("ExtraFigures", "MarkerExpression_D17CKPtype")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure12")
 panel <- file.path("data", "D17CytokinePanel.csv")
 ```
 
@@ -100,4 +100,8 @@ ThePlot <- Plot + scale_x_discrete(labels = function(y) {
 TheFileName <- paste0("D17CK_BCG_ptype.png")
 SendMeOnMyWay <- file.path(StorageLocation, TheFileName)
 ggsave(filename = SendMeOnMyWay, ThePlot, dpi = 600, width = 9, height = 3)
+```
+
+```{r}
+print("GoodBye")
 ```

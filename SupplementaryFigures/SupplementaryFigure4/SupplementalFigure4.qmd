@@ -10,7 +10,7 @@ format: docx
 # Code
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure4")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure4")
 ```
 
 ```{r}
@@ -151,7 +151,6 @@ NKTAb <- NKTAb |> mutate(Condition = "Antibody") |>
 
 ```{r}
 panel <- "data/ILT_Antibody_Panels.csv"
-StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure4")
 
 shape_condition <- c("Tetramer" = 23, "Antibody" = 23)
 fill_condition <- c("Tetramer" = "mediumorchid2", "Antibody" = "lightgreen")
@@ -187,7 +186,6 @@ Plot <- Utility_MarkerPlots(data=Data1, panel=panel, myfactor="Condition", shape
 
 ```{r}
 panel <- "data/ILT_Antibody_Panels.csv"
-StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure4")
 
 shape_condition <- c("Tetramer" = 22, "Antibody" = 22)
 fill_condition <- c("Tetramer" = "mediumorchid2", "Antibody" = "lightgreen")

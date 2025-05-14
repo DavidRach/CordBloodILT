@@ -10,7 +10,7 @@ format: docx
 # Code
 
 ```{r}
-StorageLocation <- file.path("ExtraFigures", "MarkerExpression_D17PhenotypePtype")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure11")
 panel <- file.path("data", "D17PhenotypePanel.csv")
 ```
 
@@ -69,4 +69,8 @@ Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_pale
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
                             filename="D17Phenotype_BCG_ptype", corral.width=0.8)
+```
+
+```{r}
+print("GoodBye")
 ```

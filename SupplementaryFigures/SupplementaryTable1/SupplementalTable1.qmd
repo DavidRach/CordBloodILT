@@ -9,7 +9,7 @@ library(gt)
 ```
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalTable1")
+StorageLocation <- file.path("SupplementaryFigures/SupplementaryTable1")
 Data <- read.csv("data/ILT_Antibody_Panels.csv", check.names = FALSE)
 Data1 <- Data |> filter(Panel %in% "Spectral") |> select(-Panel) |> filter(Purpose %in% "Full") |> select(-Purpose)
 Data2 <- Data |> filter(Panel %in% "Spectral") |> select(-Panel) |> filter(!Purpose %in% "Full") |> select(-Purpose)

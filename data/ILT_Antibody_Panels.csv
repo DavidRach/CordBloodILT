@@ -1,0 +1,78 @@
+Marker,Alternate.Name,Clone,Isotype,Fluorophore,Manufacturer,Catalog.Number,Panel,SubPanel,Location,Purpose
+CD62L,,SK11,"Mouse IgG2a, k",BUV395,BD Biosciences,565219,Spectral,4°,Surface,Full
+CD8,CD8a,RPA-T8,"Mouse IgG1, k",BUV496,BD Biosciences,612942,Spectral,4°,Surface,Full
+CD69,,FN50,"Mouse IgG1, k",BUV563,BD Biosciences,748764,Spectral,"4°, RT","Surface, IC",Full
+CD194,CCR4,1G1,"Mouse IgG1, k",BUV615,BD Biosciences,613000,Spectral,37°,Surface,Full
+Vd2,,B6,"Mouse IgG2, k",BUV661,BD Biosciences,750056,Spectral,"4°, RT","Surface, IC",Full
+CD183,CXCR3,1C6/CXCR3,"Mouse IgG1, k",BUV737,BD Biosciences,741866,Spectral,4°,Surface,Full
+CD4,,SK3,"Mouse IgG1, k",BUV805,BD Biosciences,612887,Spectral,"37°, RT","Surface, IC",Full
+CD127,IL-7Ra,A019D5,"Mouse IgG1, k",BV421,BioLegend,351310,Spectral,37°,Surface,Full
+CD14,,M5E2,"Mouse IgG2a, k",Pacific Blue,BioLegend,301828,Spectral,4°,Surface,Full
+CD19,,SJ25C1,"Mouse IgG1, k",Pacific Blue,BioLegend,363036,Spectral,4°,Surface,Full
+CD161,,HP-3G10,"Mouse IgG1, k",BV480,BD Biosciences,748279,Spectral,37°,Surface,Full
+CD45RA,,HI100,"Mouse IgG2b, k",BV510,BioLegend,304142,Spectral,4°,Surface,Full
+CD56,,5.1H11,"Mouse IgG1, k",BV605,BioLegend,362538,Spectral,"37°, RT","Surface, IC",Full
+CD197,CCR7,G043H7,"Mouse IgG2a, k",BV650,BioLegend,353234,Spectral,"37°, RT","Surface, IC",Full
+CD7,,M-T701,"Mouse IgG1, k",BV711,BD Biosciences,564018,Spectral,37°,Surface,Full
+IFNg,,B27,"Mouse IgG1, k",BV750,BD Biosciences,566357,Spectral,RT,Intracellular,Full
+CD196,CCR6,11A9,"Mouse IgG1, k",BV786,BD Biosciences,563704,Spectral,37°,Surface,Full
+CD3,,SK7,"Mouse IgG1, k",Spark Blue 550,BioLegend,344852,Spectral,"4°, RT","Surface, IC",Full
+hCD1d PBS-57,,,Tetramer,Alexa Fluor 488,NIH Tetramer Core,,Spectral,RT,Surface,Full
+Va24Ja18,,6B11,"Mouse IgG1, k",FITC ,BioLegend,342906,Spectral,RT,Surface,Full
+CD314,NKG2D,1D11,"Mouse IgG1, k",PE,BioLegend,320806,Spectral,"37°, RT","Surface, IC",Full
+CD26,,BA5b,"Mouse IgG2a, k",PerCP-Cy5.5,BioLegend,302716,Spectral,RT,Intracellular,Full
+CD25,IL-2Ra,M-A251,"Mouse IgG1, k",PE-Cy5,BD Biosciences,555433,Spectral,"37°, RT",Surface,Full
+TNFa,,MAb11,"Mouse IgG1, k",PE-Dazzle 594,BioLegend,502946,Spectral,RT,Intracellular,Full
+CD279,PD1,PD1.3.1.3,Mouse IgG2b,PE-Vio 770,Miltenyi Biotec,130-117-698,Spectral,"37°, RT","Surface, IC",Full
+CD16,FcyRIII,3G8,"Mouse IgG1, k",APC,BioLegend,302012,Spectral,4°,Surface,Full
+hMR1 5-OP-RU,,,Tetramer,Alexa Fluor 647,NIH Tetramer Core,,Spectral,RT,Surface,Full
+Va7.2,,3C10,"Mouse IgG1, k",Alexa Fluor 647,BioLegend,351726,Spectral,RT,Surface,Full
+CD107a,,H4A3,"Mouse IgG1, k",APC-R700,BD Biosciences,565184,Spectral,37°,Surface,Full
+CD27,,O323,"Mouse IgG1, k",APC-Fire 750,BioLegend,302846,Spectral,37°,Surface,Full
+CD38,,HIT2,"Mouse IgG1, k",APC-Fire 810,BioLegend,303550,Spectral,37°,Surface,Full
+Viability,,,,Zombie NIR Fixable Viability dye,BioLegend,423105,Spectral ,RT,Surface,Full
+CD3,,UCHT1,"Mouse IgG1, k",Alexa Fluor 647,BioLegend,300415,Spectral,4°,Surface,Unmixing
+CD3,,OKT3,"Mouse IgG2a, k",Alexa Fluor 647,BioLegend,317312,Spectral,4°,Surface,Unmixing
+CD279,PD1,EH12.2H7,"Mouse IgG1, k",BV421 ,BioLegend,329920,Conventional,"CK0, CK17, 1, 4b",Surface,Full
+Vd2,,B6,"Mouse IgG1, k",BV421 ,BioLegend,331428,Conventional,2,Surface,Full
+Viability,,,,Zombie Aqua Fixable Viability dye,BioLegend,423101,Conventional,"CK0, CK17, 1, 4b",Surface,Full
+CD3,,UCHT1,"Mouse IgG1, k",BV510 ,BioLegend,300448,Conventional,2,Surface,Full
+CD56,NCAM,5.1H11,"Mouse IgG1, k",BV650 ,BioLegend,362532,Conventional,"CK17, 4b",Surface,Full
+CD27,,O323,"Mouse IgG1, k",BV650 ,BioLegend,302828,Conventional,CK0,Surface,Full
+CD16,,3G8,"Mouse IgG1, k",BV650 ,BioLegend,302042,Conventional,1,Surface,Full
+CD314,NKG2D,1D11,"Mouse IgG1, k",Biotin ,BioLegend,320804,Conventional,2,Surface,Full
+Streptavidin,,,,BV650 ,BioLegend,405232,Conventional,2,Surface,Full
+CD107a,LAMP-1,H4A3,"Mouse IgG1, k",Alexa Fluor 488 ,BioLegend,328610,Conventional,CK17,Surface,Full
+Perforin,,dG9,"Mouse IgG2b, k",Alexa Fluor 488 ,BioLegend,308108,Conventional,"2, 4b",Intracellular,Full
+Vd2,,B6,"Mouse IgG1, k",FITC ,BioLegend,331406,Conventional,"CK0, 1",Surface,Full
+CD3,,OKT3,"Mouse IgG2a, k",PerCP-eFluor 710,Invitrogen,46-0037-42,Conventional,"CK0, 4b",Surface,Full
+CD25,,CD25-4E3,"Mouse IgG2b, k",PerCP-eFluor 710,Invitrogen,46-0257-42,Conventional,1,Surface,Full
+TNFa,,MAb11,"Mouse IgG1, k",PerCP-Cy5.5,BioLegend,502926,Conventional,CK17,Intracellular,Full
+CD56,NCAM,TULY56,"Mouse IgG1, k",PerCP-eFluor 710,Invitrogen,46-0566-42,Conventional,2,Surface,Full
+GranzymeB,,GB11,"Mouse IgG1, k",PE ,BD Biosciences,561142,Conventional,4b,Intracellular,Full
+CD56,,5.1H11,"Mouse IgG1, k",PE ,BioLegend,362508,Conventional,CK0,Surface,Full
+CD28,,"""15E8""","Mouse IgG1, k",PE ,Miltenyi Biotec,130-126-172,Conventional,1,Surface,Full
+Vd2,,B6,"Mouse IgG1, k",PE ,BioLegend,331408,Conventional,CK17,Surface,Full
+CD279,PD1,EH12.2H7,"Mouse IgG1, k",PE ,BioLegend,329906,Conventional,2,Surface,Full
+CD27,,O323,"Mouse IgG1, k",PE-Dazzle 594,BioLegend,302844,Conventional,1,Surface,Full
+CD159a,NKG2A,REA110,Recombinant human IgG1,PE-Vio 770 ,Miltenyi Biotec,130-113-567,Conventional,"2, 4b",Surface,Full
+IFNg,,45-15,"Mouse IgG1, k",PE-Vio 770,Miltenyi Biotec,130-113-494,Conventional,"CK0, CK17",Intracellular,Full
+CD3,,BW264/58,"Mouse IgG2a, k",PE-Vio 770 ,Miltenyi Biotec,130-113-130,Conventional,1,Surface,Full
+Vd2,,B6,"Mouse IgG1, k",APC ,BioLegend,331418,Conventional,4b,Surface,Full
+CD27,,O323,"Mouse IgG1, k",APC,BioLegend,302810,Conventional,CK17,Surface,Full
+TNFa,,MAb11,"Mouse IgG1, k",Alexa Fluor 647 ,BioLegend,502916,Conventional,CK0,Intracellular,Full
+Vd1,,REA173,Recombinant human IgG1,APC ,Miltenyi Biotec,130-118-968,Conventional,"1, 2",Surface,Full
+CD16,,3G8,"Mouse IgG1, k",APC-Fire 750 ,BioLegend,302060,Conventional,4b,Surface,Full
+CD45RO,,UCHL1,"Mouse IgG2a, k",APC-Fire 750 ,BioLegend,304250,Conventional,"CK0, CK17",Surface,Full
+CD45RA,,HI100,"Mouse IgG2b, k",APC-Fire 750 ,BioLegend,304152,Conventional,1,Surface,Full
+Viability,,,,BD Horizon Fixable Viability Stain 780,BD Biosciences,565388,Conventional,2,Surface,Full
+CD3,,UCHT1,"Mouse IgG1, k",BV421,BioLegend,300434,Conventional,,Surface,Compensation
+CD3,,UCHT1,"Mouse IgG1, k",BV510,BioLegend,300448,Conventional,,Surface,Compensation
+CD3,,OKT3,"Mouse IgG2a, k",BV650,BioLegend,317324,Conventional,,Surface,Compensation
+CD3,,UCHT1,"Mouse IgG1, k",FITC ,BioLegend,300406,Conventional,,Surface,Compensation
+CD3,,OKT3,"Mouse IgG2a, k",PerCP-eFluor 710,Invitrogen,46-0037-42,Conventional,,Surface,Compensation
+CD3,,UCHT1,"Mouse IgG1, k",PE,BioLegend,300441,Conventional,,Surface,Compensation
+CD3,,UCHT1,"Mouse IgG1, k",PE-Dazzle 594,BioLegend,300450,Conventional,,Surface,Compensation
+CD3,,BW264/58,"Mouse IgG2a, k",PE-Vio 770 ,Miltenyi Biotec,130-113-130,Conventional,,Surface,Compensation
+CD3,,OKT3,"Mouse IgG2a, k",APC,BioLegend,317318,Conventional,,Surface,Compensation
+CD3,,UCHT1,"Mouse IgG1, k",APC-Fire 750 ,BioLegend,300470,Conventional,,Surface,Compensation

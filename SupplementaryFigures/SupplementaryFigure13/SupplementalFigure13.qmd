@@ -33,7 +33,7 @@ fill_viral <- c("NoViral" = "white", "Viral" = "black")
 ## MAITs
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure13")
 data <- read.csv("data/MAIT_TetIsland_ExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -65,7 +65,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ## NKTs
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
 data <- read.csv("data/NKT_TetIsland_ExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -97,7 +96,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ## CD4 Vd2s
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
 data <- read.csv("data/Vd2CD4_TetIsland_ExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -152,7 +150,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ## DN Vd2s
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
 data <- read.csv("data/Vd2DN_TetIsland_ExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
@@ -230,7 +227,6 @@ ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ## CD8 Vd2s
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures/SupplementalFigure13")
 data <- read.csv("data/Vd2CD8_TetIsland_ExpressionData.csv")
 data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))

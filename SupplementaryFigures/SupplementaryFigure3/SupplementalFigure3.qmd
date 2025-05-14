@@ -32,7 +32,7 @@ fill_viral <- c("NoViral" = "white", "Viral" = "black")
 ```
 
 ```{r}
-StorageLocation <- file.path("SupplementalFigures", "SupplementalFigure3")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure3")
 
 AntibodyData <- read.csv("data/SFC_Ctrl_Antibody_Freq.csv", check.names=FALSE)
 AntibodyData$ptype <- factor(AntibodyData$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
