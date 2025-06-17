@@ -103,15 +103,19 @@ shape_ILTs <- c("Vd2" = 21, "MAITs" = 23, "NKTs"=22)
 fill_ILTs <- c("Vd2" = "red","MAITs" = "purple", "NKTs"="orange")
 
 plot <- ggplot(Memory, aes(x = Category, y = Value)) +
-    geom_boxplot(aes(group = interaction(Category, CellPop)), color = "black", fill = NA, outlier.shape = NA, position = position_dodge(width = 0.8)) + 
-     geom_beeswarm(aes(shape = CellPop, fill = CellPop), color="black", size = 2, 
-     alpha = 1, dodge.width = 0.8, corral.width=0.5, cex=0.2) + scale_shape_manual(values = shape_ILTs) + 
-     scale_fill_manual(values = fill_ILTs) + 
-    theme_bw() +
-    labs(y = NULL, title = NULL) +
-    theme(legend.position="none", panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
-    plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x=element_markdown(size = 11)) +
-    labs(y=element_blank(), x=element_blank())
+    geom_boxplot(aes(group = interaction(Category, CellPop), fill=CellPop), alpha=0.5,
+    position= position_dodge(width = 0.8), width=0.6, outlier.shape=NA, show.legend = FALSE) + 
+    stat_summary(fun = median, geom = "crossbar", 
+    aes(group = interaction(Category, CellPop)), width = 0.5,
+    position = position_dodge(width = 0.8), show.legend = FALSE) +
+    geom_beeswarm(show.legend = FALSE, aes(shape = CellPop,fill = CellPop),
+    method = "center", side = 0, priority = "density",
+    cex = 0.8, size = 2, corral = "wrap", corral.width = 0.2,
+    dodge.width = 0.8) + scale_shape_manual(values = shape_ILTs) +
+    scale_fill_manual(values = fill_ILTs) + 
+    labs(title = NULL, x = NULL, y = NULL) + theme_bw() + 
+    theme(panel.grid.major = element_blank(), panel.grid.minor = element_blank(),
+    plot.title = element_text(hjust = 0.5, size = 8))
 
 plot
 
@@ -160,16 +164,17 @@ fill_condition <- c("Tetramer" = "mediumorchid2", "Antibody" = "lightgreen")
 
 ```{r}
 MAIT <- bind_rows(MaitTet, MaitAb)
-Data <- MAIT %>% select(-"hMR1", -"hCD1d", -"Va7.2", -"Va24Ja18", -"TNFa", -"IFNg", -"CD107a", -"CD161", -"CD69", -"CD3", -"Vd2", -"CD7")
+Data <- MAIT |> select(-"hMR1", -"hCD1d", -"Va7.2", -"Va24Ja18", -"TNFa", -"IFNg", -"CD107a", -"CD161", -"CD69", -"CD3", -"Vd2", -"CD7")
 
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 Data <- Data |> dplyr::select(-CCR7)
+
 ```
 
 ```{r}
 Data <- Data |> dplyr::select(-Viral, -artexposure, -screen_vl, -isc_artreg, -ART)
 
-XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA",
+XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD27", "CD45RA", "CD62L", 
                  "CD127", "CCR4", "CD25", "PD1", "CD38")
 
 Data1 <- Data #|> filter(ptype %in% "HU")
@@ -179,7 +184,8 @@ Data1 <- Data1 |>  arrange(bid)
 Plot <- Utility_MarkerPlots(data=Data1, panel=panel, myfactor="Condition", shape_palette = shape_condition,
                             fill_palette = fill_condition, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="MAIT_AbVsTetramer", corral.width=0.8)
+                            filename="MAIT_AbVsTetramer", corral.width=0.4,
+                            style="individual", width=10)
 ```
 
 # Supplemental Figure 4.C
@@ -202,7 +208,7 @@ Data <- Data |> dplyr::select(-CCR7)
 ```{r}
 Data <- Data |> dplyr::select(-Viral, -artexposure, -screen_vl, -isc_artreg, -ART)
 
-XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA",
+XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD27", "CD45RA", "CD62L", 
                  "CD127", "CCR4", "CD25", "PD1", "CD38")
 
 Data1 <- Data #|> filter(ptype %in% "HU")
@@ -212,7 +218,8 @@ Data1 <- Data1 |>  arrange(bid)
 Plot <- Utility_MarkerPlots(data=Data1, panel=panel, myfactor="Condition", shape_palette = shape_condition,
                             fill_palette = fill_condition, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="NKT_AbVsTetramer", corral.width=0.8)
+                            filename="NKT_AbVsTetramer", corral.width=0.4,
+                            style="individual", width=10)
 ```
 
 ```{r}

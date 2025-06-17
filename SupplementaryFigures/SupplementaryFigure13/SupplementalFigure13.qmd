@@ -1,22 +1,23 @@
 ---
-title: "Supplementary Figure 13"
+title: "Supplementary Figure 11"
 format: docx
 ---
 
 # Blurb
 
-**Supplementary Figure 13: Sex-based differences in ILT marker expression.** (A) The beeswarm plots display the frequency of differentially expressed markers in the ILT clusters identified in Figure 1.C. Symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify infant sex. (A) displays differential PD1 expression in MAITS, (B) differential NKG2D expression in NKTs, (C), (D), and (E) depict differentially expressed markers in CD4+, CD8+ and CD4-CD8- (DN) V𝛿2 cell clusters respectively.
+**Supplementary Figure 11: Marker expression profiles of resting cord blood V𝛿2 cells post-expansion.** Thawed PBMC were stimulated with Zoledronate and IL-2, BCG and IL-2, or IL-2 alone, and expanded in vitro for 17 days. The beeswarm plots show the proportion of cord blood V𝛿2 cells expressing individual markers listed on the x-axis after treatment with (A) IL-2 alone, (B) IL-2 and Zoledronate, and (C) IL-2 and BCG. The symbols show individual values, boxplots show median with IQR, and whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
 
 # Code
 
 ```{r}
-library(purrr)
-library(Coereba)
-library(ggplot2)
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure11")
+panel <- file.path("data", "D17PhenotypePanel.csv")
 ```
 
 ```{r}
 #| code-fold: true
+library(Coereba)
+
 shape_sex <- c("Female" = 22, "Male" = 21)
 fill_sex <- c("Female" = "white", "Male" = "black")
 
@@ -30,277 +31,46 @@ shape_viral <- c("NoViral" = 22, "Viral" = 21)
 fill_viral <- c("NoViral" = "white", "Viral" = "black")
 ```
 
-## MAITs
-
 ```{r}
-StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure13")
-data <- read.csv("data/MAIT_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+XAxisLevels <- c("CD45RA", "CD27", "PD1", "CD56", "CD16", "NKG2D", "NKG2A", "Perforin", "CD28", "CD25")
 ```
 
-### Figure A
+## Figure A
 
 ```{r}
-PlotName <- "MAIT_TetLocal_PD1"
+File <- file.path("data", "gd_CFC_D17Phenotype_IL2ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
 
-ThePlot <- map(names(data)[34], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="D17Phenotype_IL2_ptype", corral.width=0.8)
 ```
 
-## NKTs
+## Figure B
 
 ```{r}
-data <- read.csv("data/NKT_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+File <- file.path("data", "gd_CFC_D17Phenotype_ZOLExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="D17Phenotype_ZOL_ptype", corral.width=0.8)
 ```
 
-```{r}
-PlotName <- "NKT_TetLocal_NKG2D"
-
-ThePlot <- map(names(data)[31], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=1, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-### Figure B
-
-## CD4 Vd2s
+## Figure C
 
 ```{r}
-data <- read.csv("data/Vd2CD4_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
-```
+File <- file.path("data", "gd_CFC_D17Phenotype_BCGExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
 
-### Figure C.I
-
-```{r}
-PlotName <- "Vd2CD4_TetLocal_NKG2D"
-
-ThePlot <- map(names(data)[31], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-### Figure C.II
-
-```{r}
-PlotName <- "Vd2CD4_TetLocal_PD1"
-
-ThePlot <- map(names(data)[34], ~ Utility_Behemoth(data = data, var = .x, 
-myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
- fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1,statsHeight=1, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-## DN Vd2s
-
-```{r}
-data <- read.csv("data/Vd2DN_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
-```
-
-### Figure D.I
-
-```{r}
-PlotName <- "Vd2DN_TetLocal_NKG2D"
-
-ThePlot <- map(names(data)[31], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-### Figure D.II
-
-```{r}
-PlotName <- "Vd2DN_TetLocal_PD1"
-
-ThePlot <- map(names(data)[34], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-### Figure D.III
-
-```{r}
-PlotName <- "Vd2DN_TetLocal_CD62L"
-
-ThePlot <- map(names(data)[16], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-## CD8 Vd2s
-
-```{r}
-data <- read.csv("data/Vd2CD8_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
-```
-
-### Figure E.I
-
-```{r}
-PlotName <- "Vd2CD8_TetLocal_CD38"
-
-ThePlot <- map(names(data)[12], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=1, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15), 
-      axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-### Figure E.II
-
-```{r}
-PlotName <- "Vd2CD8_TetLocal_CD56"
-
-ThePlot <- map(names(data)[26], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-### Figure E.III
-
-```{r}
-PlotName <- "Vd2CD8_TetLocal_CD62L"
-
-ThePlot <- map(names(data)[16], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "infant_sex", normality = "dagostino", shape_palette = shape_sex,
-  fill_palette = fill_sex, cex = 2, size = 3, corral.width = 1, statsHeight=NULL, scalePercent = TRUE, correction = "BH"))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_sex.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="D17Phenotype_BCG_ptype", corral.width=0.8)
 ```
 
 ```{r}
-print("Goodbye")
+print("GoodBye")
 ```
