@@ -5,7 +5,7 @@ format: docx
 
 # Blurb
 
-**Figure 2: Cord blood ILT subsets at baseline are characterized by specific marker expression profiles.** (A) The beeswarm plots show the proportion of cells expressing individual markers listed on the x-axis for V𝛿2 T (A), MAIT (B) and NKT (C) cells, respectively. The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
+**Figure 2: Semi-supervised analysis highlights cord blood V𝛿2 T cell phenotypic heterogeneity between clusters** The beeswarm plots on the left show the proportion of cells in each V𝛿2 PaCMAP cluster (identified in Figure 1.C) comparing the three exposure groups. The beeswarm plots on the right display the proportion of V𝛿2 T cells in the respective island expressing the individual markers listed on the x-axis. The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.(A) depicts results for the CD4+ PaCMAP cluster, (B) for CD8+, (C) for DN, (D) for T17, and (E) for PD1hi.
 
 # Code
 
@@ -17,6 +17,7 @@ panel <- file.path("data", "ILTPanelTetramer.csv")
 ```{r}
 #| code-fold: true
 library(Coereba)
+library(ggplot2)
 
 shape_sex <- c("Female" = 22, "Male" = 21)
 fill_sex <- c("Female" = "white", "Male" = "black")
@@ -32,18 +33,267 @@ fill_viral <- c("NoViral" = "white", "Viral" = "black")
 ```
 
 ```{r}
-XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA",
-                 "CD127", "CCR4", "CD25", "PD1", "CD38")
+XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "CD56", "NKG2D", "CD16", "CD27", "CD45RA", "CD62L", "CD127", "CCR4", "CD25", "PD1", "CD38")
 ```
 
-## Figure A
+## Figure A.I
 
 ```{r}
-File <- file.path("data", "ILT_CtrlTetramer_Vd2ExpressionData.csv")
-data <- read.csv(File, check.names=FALSE)
+PlotName <- "Vd2CD4_ptype_Freq"
 
+data <- read.csv("data/SubsetFrequenciesTetramer.csv", check.names=FALSE)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+TheSubset <- data |> dplyr::filter(Population %in% "Vd2_CD4")
+
+SummaryStats <- TheSubset |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="infant_sex")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_Behemoth(data = TheSubset, var = "PopFreq", myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 3, size = 3, corral.width = 4, statLines = FALSE, statsHeight = 1.0, scalePercent = TRUE, correction = "BH")
+
+ThePlot <- Plot + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(), title=element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+Plot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, ThePlot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure A.II
+
+```{r}
+File <- file.path("data", "Vd2CD4_TetIsland_ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+
+SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="Vd2CD4_Tetramer_Ptype", corral.width=0.8,
+                            style="individual", width=10)
+```
+
+## Figure B.I
+
+```{r}
+PlotName <- "Vd2CD8_ptype_Freq"
+
+data <- read.csv("data/SubsetFrequenciesTetramer.csv", check.names=FALSE)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+TheSubset <- data |> dplyr::filter(Population %in% "Vd2_CD8")
+
+SummaryStats <- TheSubset |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="infant_sex")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_Behemoth(data = TheSubset, var = "PopFreq", myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 3, size = 3, corral.width = 4, statLines = FALSE, statsHeight = 1.0, scalePercent = TRUE)
+
+ThePlot <- Plot + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(), title=element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+ThePlot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, ThePlot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure B.II
+
+```{r}
+File <- file.path("data", "Vd2CD8_TetIsland_ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
+data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+
+SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="Vd2CD8_Tetramer_Ptype", corral.width=0.8,
+                            style="individual", width=10)
+```
+
+## Figure C.I
+
+```{r}
+PlotName <- "Vd2DN_ptype_Freq"
+
+data <- read.csv("data/SubsetFrequenciesTetramer.csv", check.names=FALSE)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+TheSubset <- data |> dplyr::filter(Population %in% "Vd2_DN")
+
+SummaryStats <- TheSubset |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="infant_sex")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_Behemoth(data = TheSubset, var = "PopFreq", myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 3, size = 3, corral.width = 4, statLines = FALSE, statsHeight = 1.0, scalePercent = TRUE, correction = "BH")
+
+ThePlot <- Plot + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(), title=element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+ThePlot      
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, ThePlot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure C.II
+
+```{r}
+File <- file.path("data", "Vd2DN_TetIsland_ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
+data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+
+SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="Vd2DN_Tetramer_Ptype", corral.width=0.8,
+                            style="individual", width=10)
+```
+
+## Figure D.I
+
+```{r}
+PlotName <- "Vd2T17_ptype_Freq"
+
+data <- read.csv("data/SubsetFrequenciesTetramer.csv", check.names=FALSE)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+TheSubset <- data |> dplyr::filter(Population %in% "Vd2_T17")
+
+SummaryStats <- TheSubset |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="infant_sex")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_Behemoth(data = TheSubset, var = "PopFreq", myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 3, size = 3, corral.width = 4, statLines = TRUE, statsHeight = 0.8,
+   scalePercent = TRUE, correction = "BH", keepNS=FALSE)
+
+ThePlot <- Plot + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(), title=element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+ThePlot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, ThePlot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure D.II
+
+```{r}
+File <- file.path("data", "Vd2T17_TetIsland_ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
+data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+
+SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
+                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
+                            filterForThese = XAxisLevels, outpath=StorageLocation,
+                            filename="Vd2T17_Tetramer_Ptype", corral.width=0.8,
+                            style="individual", width=10)
+```
+
+## Figure E.I
+
+```{r}
+PlotName <- "Vd2PD1_ptype_Freq"
+
+data <- read.csv("data/SubsetFrequenciesTetramer.csv", check.names=FALSE)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
+data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+TheSubset <- data |> dplyr::filter(Population %in% "Vd2_PD1")
+
+SummaryStats <- TheSubset |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="infant_sex")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[8]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+Plot <- Utility_Behemoth(data = TheSubset, var = "PopFreq", myfactor = "ptype",
+ normality = "dagostino", shape_palette = shape_ptype, fill_palette = fill_ptype,
+  cex = 3, size = 3, corral.width = 0.5, statLines = FALSE, statsHeight = 1.0, scalePercent = TRUE, correction = "BH")
+
+ThePlot <- Plot + labs(y = NULL, title = NULL) +
+     theme(plot.caption = element_blank(), title=element_blank(),
+      axis.text.y = element_text(size = 15),
+       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+
+ThePlot
+
+Abbreviation <- "_ptype.png"
+ThePlotName <- paste0(PlotName, Abbreviation)
+TheFile <- file.path(StorageLocation, ThePlotName)
+
+ggsave(filename = TheFile, ThePlot, dpi = 600, width = 4, height = 3)
+```
+
+## Figure E.II
+
+```{r}
+File <- file.path("data", "Vd2PD1_TetIsland_ExpressionData.csv")
+data <- read.csv(File, check.names=FALSE)
+# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
+data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
 Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
@@ -53,45 +303,8 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2_Tetramer_Ptype", corral.width=0.8)
-```
-
-## Figure B
-
-```{r}
-File <- file.path("data", "ILT_CtrlTetramer_MAITExpressionData.csv")
-data <- read.csv(File, check.names=FALSE)
-# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
-data <- data |> dplyr::select(-CCR7)
-
-SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
-Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
-  normality = "dagostino", correction = "BH", returnType = "median"))
-# View(Summaries)
-
-Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
-                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
-                            filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="MAIT_Tetramer_Ptype", corral.width=0.8)
-```
-
-## Figure C
-
-```{r}
-File <- file.path("data", "ILT_CtrlTetramer_NKTExpressionData.csv")
-data <- read.csv(File, check.names=FALSE)
-# CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
-data <- data |> dplyr::select(-CCR7)
-
-SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
-Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
-  normality = "dagostino", correction = "BH", returnType = "median"))
-# View(Summaries)
-
-Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
-                            fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
-                            filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="NKT_Tetramer_Ptype", corral.width=0.8)
+                            filename="Vd2PD1_Tetramer_Ptype", corral.width=0.8,
+                            style="individual", width=10)
 ```
 
 ```{r}

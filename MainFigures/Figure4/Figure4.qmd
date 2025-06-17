@@ -1,207 +1,183 @@
 ---
-title: "Figure 4"
+title: "Figure 5"
 format: docx
 ---
 
 # Blurb
 
-**Figure 4: Altered marker expression of cord blood ILT subsets in HEU infants.** The beeswarm plots compare the expression of specific markers between exposure groups. Symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status. (A) Proportions of CD62L+ (left), CD161+ (center), and CD56+ (right) cells in the DN V𝛿2 cluster. (B) Proportions of CD62L+ cells in the V𝛿2 T17 cluster. (C) Proportions of CD161+ cells in the NKT PaCMAP cluster.
+**Figure 4: Functional heterogeneity of cord blood ILT in response to polyclonal stimulation ex-vivo** Thawed CBMC were stained with a panel of 29 mAbs after a 6 hour stimulation with PMA plus ionomycin in the presence of golgi inhibitors. (A) The dotplots of a representative specimen obtained from an unexposed (HU) neonate show the intracellular cytokine reponse (% of IFN𝛾+ by % of TNF⍺+) for V𝛿2 T cells (top), MAITs (middle), NKTs (bottom). (B) The beeswarm boxplot depicts the frequency of TNF⍺+ (top), IFN𝛾+ (middle), and TNF⍺+ IFN𝛾+ (bottom) cells for different manually-gated cell subsets (listed on the x axis). Symbols depict individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status. (C) A PaCMAP is used to visualize ILT subsets after PMA+ionomycin stimulation, including NKTs and MAITs (identified by anti-TCR staining). The gates are based on density-distribution and marker expression, with color code and cell counts included in the legend. (D) The heatmap summarizes marker expression for ILT islands from the PaCMAP in C. The 50th percentile of the distribution of median frequencies of cells positive for each marker is displayed by a combination of colors and symbols.
 
 # Code
 
 ```{r}
-library(purrr)
 library(Coereba)
+library(gt)
 library(ggplot2)
+library(dplyr)
+```
+
+## Figure B.I
+
+```{r}
+StorageLocation <- file.path("MainFigures", "Figure4")
+Data <- read.csv("data/CytokinesByPop.csv")
+Data <- Data |> dplyr::filter(ptype == "HU")
+
+Data$CellPop <- gsub("+", "", fixed=TRUE, Data$CellPop)
+#Data$CellPop <- gsub("MAITs", "MAIT", fixed=TRUE, Data$CellPop)
+#Data$CellPop <- gsub("NKTs", "NKT", fixed=TRUE, Data$CellPop)
+Data$CellPop <- factor(Data$CellPop, levels=c("Vd2", "MAITs", "NKTs", "CD8", "CD4", "NK"))
+
+Data <- Data |> mutate(TNFaTotal=`Q1..IFNg....TNFa.` + `Q2..IFNg....TNFa.`)
+Data <- Data |> mutate(IFNgTotal=`Q2..IFNg....TNFa.`+`Q3..IFNg....TNFa.`)
+
+Data <- Data |> filter(ptype %in% "HU")
+Data <- Data |> unique()
+
+SummaryStats <- Data |> dplyr::filter(CellPop %in% "Vd2")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[c(6, 9:10)]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+SummaryStats <- Data |> dplyr::filter(CellPop %in% "MAITs")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[c(6, 9:10)]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+SummaryStats <- Data |> dplyr::filter(CellPop %in% "NKTs")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[c(6, 9:10)]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+SummaryStats <- Data |> dplyr::filter(CellPop %in% "NK")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[c(6, 9:10)]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+SummaryStats <- Data |> dplyr::filter(CellPop %in% "CD4")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[c(6, 9:10)]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
+
+SummaryStats <- Data |> dplyr::filter(CellPop %in% "CD8")
+Summaries <- purrr::map_dfr(colnames(SummaryStats[c(6, 9:10)]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "CellPop",
+  normality = "dagostino", correction = "BH", returnType = "median"))
+# View(Summaries)
 ```
 
 ```{r}
-#| code-fold: true
-shape_sex <- c("Female" = 22, "Male" = 21)
-fill_sex <- c("Female" = "white", "Male" = "black")
-
-shape_ptype <- c("HU" = 22, "HEU-lo" = 21, "HEU-hi" = 21)
-fill_ptype <- c("HU" = "white", "HEU-lo" = "darkgray", "HEU-hi" = "black")
-
-shape_art <- c("HU" = 22, "HEU" = 21)
-fill_art <- c("HU" = "white", "HEU" = "black")
-
-shape_viral <- c("NoViral" = 22, "Viral" = 21)
-fill_viral <- c("NoViral" = "white", "Viral" = "black")
+shape_ILTs <- c("Vd2" = 21, "MAITs" = 23, "NKTs"=22, "CD8"=25, "CD4"=24, "NK"=21)
+fill_ILTs <- c("Vd2" = "red","MAITs" = "purple", "NKTs"="orange", "CD8"="green", "CD4"="blue", "NK"="black")
 ```
 
-## DN Vd2
-
 ```{r}
-StorageLocation <- file.path("MainFigures/Figure4")
-data <- read.csv("data/Vd2DN_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
-```
+PlotName <- "SubsetsTotalTNFa"
 
-### Figure C.I
+ThePlot <- purrr::map(names(Data)[9], ~ Utility_Behemoth(data = Data, var = .x, myfactor = "CellPop", normality = "dagostino", shape_palette = shape_ILTs, fill_palette = fill_ILTs, cex = 2, size = 3, corral.width = 1, statLines=FALSE, statsHeight=0.8, scalePercent = TRUE, correction = "BH"))
 
-```{r}
-PlotName <- "Vd2DN_TetLocal_CD62L"
-
-ThePlot <- map(names(data)[16], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype,
-  fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1,
-   statsHeight=0.4, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15, angle = 45, hjust=1)) + scale_x_discrete(labels = function(y) {
+    ifelse(y == "Vd2", expression(V * delta * " " * 2 * s),
+                                       as.character(y))
+  })
 
 Plot
 
-Abbreviation <- "_ptype.png"
+Abbreviation <- "_Antibody.png"
 ThePlotName <- paste0(PlotName, Abbreviation)
 TheFile <- file.path(StorageLocation, ThePlotName)
 
 ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ```
 
-### Figure C.II
+## Figure B.II
 
 ```{r}
-PlotName <- "Vd2DN_TetLocal_CD161"
+PlotName <- "SubsetsTotalIFNg"
 
-ThePlot <- map(names(data)[24], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype,
-  fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1,
-   statsHeight=0.8, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
+ThePlot <- purrr::map(names(Data)[10], ~ Utility_Behemoth(data = Data, var = .x, myfactor = "CellPop", normality = "dagostino", shape_palette = shape_ILTs, fill_palette = fill_ILTs, cex = 1.6, size = 3, corral.width = 0.8, statLines=FALSE, statsHeight=0.8, scalePercent = TRUE, correction = "BH"))
 
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15, angle = 45, hjust=1)) + scale_x_discrete(labels = function(y) {
+    ifelse(y == "Vd2", expression(V * delta * " " * 2 * s),
+                                       as.character(y))
+  })
 
 Plot
 
-Abbreviation <- "_ptype.png"
+Abbreviation <- "_Antibody.png"
 ThePlotName <- paste0(PlotName, Abbreviation)
 TheFile <- file.path(StorageLocation, ThePlotName)
 
 ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ```
 
-### Figure C.III
+## Figure B.III
 
 ```{r}
-PlotName <- "Vd2DN_TetLocal_CD56"
+PlotName <- "SubsetsTNFa+IFNg+"
 
-ThePlot <- map(names(data)[26], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype,
-  fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1,
-   statsHeight=0.1, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
+ThePlot <- purrr::map(names(Data)[6], ~ Utility_Behemoth(data = Data, var = .x, myfactor = "CellPop", normality = "dagostino", shape_palette = shape_ILTs, fill_palette = fill_ILTs, cex = 1.6, size = 3, corral.width = 0.8, statLines=FALSE, statsHeight=0.8, scalePercent = TRUE, correction = "BH"))
 
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + 
-    theme(plot.caption = element_blank(), 
-    axis.text.y = element_text(size = 15),
-     axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
+Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) + theme(plot.caption = element_blank(), axis.text.y = element_text(size = 15), axis.text.x= element_text(size = 15, angle = 45, hjust=1)) + scale_x_discrete(labels = function(y) {
+    ifelse(y == "Vd2", expression(V * delta * " " * 2 * s),
+                                       as.character(y))
+  })
 
 Plot
 
-Abbreviation <- "_ptype.png"
+Abbreviation <- "_Antibody.png"
 ThePlotName <- paste0(PlotName, Abbreviation)
 TheFile <- file.path(StorageLocation, ThePlotName)
 
 ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
 ```
 
-## T17 Vd2
+## Figure D
 
 ```{r}
-StorageLocation <- file.path("MainFigures/Figure4")
-data <- read.csv("data/Vd2T17_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
+StorageLocation <- file.path("MainFigures", "Figure5")
+data <- file.path("data", "ILT_PMAIsland_HeatmapData.csv")
+data <- read.csv(data, check.names=TRUE)
 ```
-
-### Figure B.I
 
 ```{r}
-PlotName <- "Vd2T17_TetLocal_CD62L"
+RemoveMarkers <- c("DumpChannel", "Viability", "CXCR3", "CCR7")
+MarkerOrder <- c("CD7", "CD3", "Vd2", "Va7.2", "Va24Ja18", "CD8", "CD4", "CD26", "CCR6", "CD161",
+                 "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA", "CD127", "CD25", "CCR4",
+                 "PD1", "CD38", "CD69", "TNFa", "IFNg", "CD107a")
 
-ThePlot <- map(names(data)[16], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype,
-  fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1, 
-  statsHeight=0.15, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(), 
-     axis.text.y = element_text(size = 15),
-      axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_ptype.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+Table <- Coereba:::Coereba_Heatmap(data=data, RemoveMarkers=RemoveMarkers, MarkerOrder=MarkerOrder)
 ```
-
-## NKTs
 
 ```{r}
-StorageLocation <- file.path("MainFigures/Figure4")
-data <- read.csv("data/NKT_TetIsland_ExpressionData.csv")
-data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
-data$infant_sex <- factor(data$infant_sex, levels=c("Female", "Male"))
-```
+Bolded <- Table |> 
+  cols_label(Vd2_CD4 ~ md('**V&delta;2<br>CD4**')) |>
+  cols_label(Vd2_CD8 ~ md('**V&delta;2<br>CD8**')) |> 
+  cols_label(Vd2_DN ~ md('**V&delta;2<br>DN**')) |>
+  cols_label(Vd2_T17 ~ md('**V&delta;2<br>T17**')) |> 
+  cols_label(Vd2_PD1 ~ md('**V&delta;2<br>PD1**')) |>
+  cols_label(Marker ~ md('**Marker<br>**')) |> 
+  cols_label(MAITs ~ md('**MAITs<br>**')) |>
+  cols_label(NKTs ~ md('**NKTs<br>**'))
 
-### Figure C.I
+Greeked <- Bolded |>
+  sub_values(pattern="Vd2", replacement = "V\u03B42") |>
+  sub_values(pattern="TNFa", replacement = "TNF\u03B1") |> 
+  sub_values(pattern="IFNg", replacement = "IFN\u03B3") |>
+  sub_values(pattern="Va7.2", replacement = "V\u03B17.2") |> 
+  sub_values(pattern="Va24Ja18", replacement = "V\u03B124J\u03B118")
+
+Greeked <- Greeked |> opt_table_outline(style="solid", width=px(2), color="black") |>
+  tab_options(column_labels.border.top.style = "solid", column_labels.border.top.width = px(2),
+              column_labels.border.top.color = "black", table.border.bottom.style = "double",
+              table.border.bottom.width = px(2), table.border.bottom.color = "black", 
+              table.font.size = 22)
+```
 
 ```{r}
-PlotName <- "NKT_TetLocal_CD161"
-
-ThePlot <- map(names(data)[24], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype,
-  fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 1,
-   statsHeight=1.0, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_ptype.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
+filename <- "ILT_PMA_Heatmap.png"
+StorageLocation <- file.path(StorageLocation, filename)
+Greeked |> gtsave(StorageLocation, vwidth = 1500, vheight = 1000)
 ```
-
-## NKT CD56
-
-```{r}
-PlotName <- "NKT_TetLocal_CD56"
-
-ThePlot <- map(names(data)[26], ~ Utility_Behemoth(data = data, var = .x,
- myfactor = "ptype", normality = "dagostino", shape_palette = shape_ptype,
-  fill_palette = fill_ptype, cex = 2, size = 3, corral.width = 0.7,
-  statsHeight=0.1, scalePercent = TRUE, correction = "BH", keepNS=FALSE))
-
-Plot <- ThePlot[[1]] + labs(y = NULL, title = NULL) +
-     theme(plot.caption = element_blank(),
-      axis.text.y = element_text(size = 15),
-       axis.text.x= element_text(size = 15)) #+ lims(y=c(0,NA))
-
-Plot
-
-Abbreviation <- "_ptype.png"
-ThePlotName <- paste0(PlotName, Abbreviation)
-TheFile <- file.path(StorageLocation, ThePlotName)
-
-#ggsave(filename = TheFile, Plot, dpi = 600, width = 4, height = 3)
-```
-
-# Epilogue
 
 ```{r}
 print("Goodbye")
