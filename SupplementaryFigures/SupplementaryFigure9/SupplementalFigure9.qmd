@@ -1,16 +1,16 @@
 ---
-title: "Figure 6"
+title: "Supplemental Figure 9"
 format: docx
 ---
 
 # Blurb
 
-**Figure 6: Distinct functional profiles of cord blood ILT following polyclonal stimulation** (A) The beeswarm plots show the proportion of cells expressing individual markers listed on the x-axis for V𝛿2 T (A), MAIT (B) and NKT (C) cells, respectively. The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
+**Supplemental Figure 9: Distinct functional profiles of cord blood ILT following polyclonal stimulation** (A) The beeswarm plots show the proportion of cells expressing individual markers listed on the x-axis for V𝛿2 T (A), MAIT (B) and NKT (C) cells, respectively. The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
 
 # Code
 
 ```{r}
-StorageLocation <- file.path("MainFigures", "Figure6")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure9")
 panel <- file.path("data", "ILTPanelAntibody.csv")
 ```
 
@@ -44,11 +44,13 @@ File <- file.path("data", "ILT_PMAAntibody_Vd2ExpressionData.csv")
 data <- read.csv(File, check.names=FALSE)
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=FALSE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2_PMAAntibody_Ptype", corral.width=0.8)
+                            filename="Vd2_PMAAntibody_Ptype", corral.width=0.6,
+                            style="individual", width=12)
 
 ThePlot <- Plot + scale_x_discrete(labels = function(y) {
     ifelse(y == "IFNg", expression(IFN * gamma),
@@ -68,11 +70,13 @@ File <- file.path("data", "ILT_PMAAntibody_MAITExpressionData.csv")
 data <- read.csv(File, check.names=FALSE)
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=FALSE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="MAIT_PMAAntibody_Ptype", corral.width=0.8)
+                            filename="MAIT_PMAAntibody_Ptype", corral.width=0.6,
+                            style="individual", width=12)
 
 ThePlot <- Plot + scale_x_discrete(labels = function(y) {
     ifelse(y == "IFNg", expression(IFN * gamma),
@@ -92,11 +96,13 @@ File <- file.path("data", "ILT_PMAAntibody_NKTExpressionData.csv")
 data <- read.csv(File, check.names=FALSE)
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=FALSE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="NKT_PMAAntibody_Ptype", corral.width=0.8)
+                            filename="NKT_PMAAntibody_Ptype", corral.width=0.6,
+                            style="individual", width=12)
 
 ThePlot <- Plot + scale_x_discrete(labels = function(y) {
     ifelse(y == "IFNg", expression(IFN * gamma),

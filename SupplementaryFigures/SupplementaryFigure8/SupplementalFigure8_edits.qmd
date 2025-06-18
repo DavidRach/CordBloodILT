@@ -1,16 +1,16 @@
 ---
-title: "Figure 2"
+title: "Supplementary Figure 8"
 format: docx
 ---
 
 # Blurb
 
-**Figure 2: Cord blood ILT subsets at baseline are characterized by specific marker expression profiles.** (A) The beeswarm plots show the proportion of cells expressing individual markers listed on the x-axis for V𝛿2 T (A), MAIT (B) and NKT (C) cells, respectively. The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
+**Supplementary Figure 8: Cord blood ILT subsets at baseline are characterized by specific marker expression profiles.** (A) The beeswarm plots show the proportion of cells expressing individual markers listed on the x-axis for V𝛿2 T (A), MAIT (B) and NKT (C) cells, respectively. The symbols show individual values, boxplots show median and IQR, with whiskers indicating the +/- 1.5 IQR range. Shape and color identify HIV-exposure status.
 
 # Code
 
 ```{r}
-StorageLocation <- file.path("MainFigures", "Figure2")
+StorageLocation <- file.path("SupplementaryFigures", "SupplementaryFigure8")
 panel <- file.path("data", "ILTPanelTetramer.csv")
 ```
 
@@ -32,7 +32,7 @@ fill_viral <- c("NoViral" = "white", "Viral" = "black")
 ```
 
 ```{r}
-XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "NKG2D", "CD56", "CD16", "CD62L", "CD27", "CD45RA",
+XAxisLevels <- c("CD8", "CD4", "CD26", "CCR6", "CD161", "CD56", "NKG2D", "CD16", "CD27", "CD45RA", "CD62L", 
                  "CD127", "CCR4", "CD25", "PD1", "CD38")
 ```
 
@@ -44,15 +44,17 @@ data <- read.csv(File, check.names=FALSE)
 
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
 Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
   normality = "dagostino", correction = "BH", returnType = "median"))
 # View(Summaries)
 
-Plot <- Utility_MarkerPlots2(data=data, panel=panel, myfactor="ptype", 
+Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", 
   shape_palette = shape_ptype, fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE, filterForThese = XAxisLevels, outpath=StorageLocation,
-  filename="Vd2_Tetramer_Ptype_2", corral.width=0.8, width=12)
+  filename="Vd2_Tetramer_Ptype_2", corral.width=0.4,
+  style="individual", width=12)
 ```
 
 ## Figure B
@@ -62,6 +64,7 @@ File <- file.path("data", "ILT_CtrlTetramer_MAITExpressionData.csv")
 data <- read.csv(File, check.names=FALSE)
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
 Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
@@ -71,7 +74,8 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="MAIT_Tetramer_Ptype", corral.width=0.8)
+                            filename="MAIT_Tetramer_Ptype", corral.width=0.4,
+                            style="individual", width=12)
 ```
 
 ## Figure C
@@ -81,6 +85,7 @@ File <- file.path("data", "ILT_CtrlTetramer_NKTExpressionData.csv")
 data <- read.csv(File, check.names=FALSE)
 # CCR7 staining was not up to par for unsupervised analysis, removing from ME plots. 
 data <- data |> dplyr::select(-CCR7)
+data$ptype <- factor(data$ptype, levels=c("HU", "HEU-lo", "HEU-hi"))
 
 SummaryStats <- data |> dplyr::mutate(Comparison = "Control") |> dplyr::relocate(Comparison, .after="isc_artreg")
 Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data = SummaryStats,var = .x, myfactor = "Comparison",
@@ -90,7 +95,8 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="NKT_Tetramer_Ptype", corral.width=0.8)
+                            filename="NKT_Tetramer_Ptype", corral.width=0.4,
+                            style="individual", width=12)
 ```
 
 ```{r}
