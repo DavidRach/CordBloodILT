@@ -86,7 +86,7 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2CD4_Tetramer_Ptype", corral.width=0.8,
+                            filename="Vd2CD4_Tetramer_Ptype", corral.width=0.4,
                             style="individual", width=10)
 ```
 
@@ -140,7 +140,7 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2CD8_Tetramer_Ptype", corral.width=0.8,
+                            filename="Vd2CD8_Tetramer_Ptype", corral.width=0.4,
                             style="individual", width=10)
 ```
 
@@ -194,7 +194,7 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2DN_Tetramer_Ptype", corral.width=0.8,
+                            filename="Vd2DN_Tetramer_Ptype", corral.width=0.4,
                             style="individual", width=10)
 ```
 
@@ -249,7 +249,7 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:37]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2T17_Tetramer_Ptype", corral.width=0.8,
+                            filename="Vd2T17_Tetramer_Ptype", corral.width=0.4,
                             style="individual", width=10)
 ```
 
@@ -303,7 +303,7 @@ Summaries <- purrr::map_dfr(colnames(SummaryStats[10:35]), ~ Utility_Stats(data 
 Plot <- Utility_MarkerPlots(data=data, panel=panel, myfactor="ptype", shape_palette = shape_ptype,
                             fill_palette = fill_ptype, XAxisLevels = XAxisLevels, savePlot=TRUE,
                             filterForThese = XAxisLevels, outpath=StorageLocation,
-                            filename="Vd2PD1_Tetramer_Ptype", corral.width=0.8,
+                            filename="Vd2PD1_Tetramer_Ptype", corral.width=0.4,
                             style="individual", width=10)
 ```
 
