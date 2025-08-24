@@ -11,7 +11,7 @@ Please note, you will need to install [Coereba](https://github.com/DavidRach/Coe
 
 ## Raw Data
 
-Due to size constraints, this repository only contains the processed data files derrived from our original .fcs files. These are being uploaded to ImmPort (SDY3080) and will be available at the next release cycle. 
+Due to size constraints, this repository only contains the processed data files derrived from our original .fcs files. These are being uploaded to ImmPort (SDY3080) and will be available following the September 25th, 2025 release. 
 
 ## Interactive View
 
