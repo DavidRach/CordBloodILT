@@ -1,0 +1,155 @@
+---
+title: "Peer Review"
+format: pdf
+---
+
+## Reviewer 1
+
+**Q1:** **Please list your revision requests for the authors and provide your detailed comments, including highlighting limitations and strengths of the study and evaluating the validity of the methods, results, and data interpretation. If you have additional comments based on Q2 and Q3 you can add them as well.**
+
+The authors described in detail the phenotypic features of some subsets of lymphoid cells, including Vd2 T cells, MAIT T cells, and NKT cells from peculiar cohorts of cord blood of neonates Indeed, they consider cord blood ILT in neonates born to healthy women and women living with HIV, as stated in the abstract.
+
+The authors also evaluated the presence of some cytokines after stimulation with nonspecific stimuli and components of cytolytic machinery of lymphocytes, such as perforin and CD107a, as markers of functionality of the cell subsets. Also, the phenotypic features of activated cells with BCG or zoledronate and IL2 or only IL2.
+
+The presentation of data is detailed and well-performed. The analyses are conducted with rigor and are well-explained.
+
+The main matter with this manuscript is the message given. The authors presented detailed phenotypic data on different cell subsets, but the differences reported are not strong. In addition, the findings reported do not add any insights into the relevance of the subsets analysed in the specific context of the newborns from HIV infected or uninfected mothers.
+
+For instance, it is not determined whether the TCR of Tvd2 cells or other gdT cells are different in the cohorts analyzed. The presence of inhibitory/activating receptors for HLA-class I, such as KIR, is not analyzed. The background for viral infections, such as CMV, EBV (besides HIV), or bacterial infections, of mothers is not reported. Overall, the manuscript is well-performed and presented, but the findings reported appear not to be strong enough to give them biological significance. The study appears descriptive.
+
+![](PeerReview/Reviewer1Checklist.png){fig-align="left"}
+
+## Reply to Reviewer 1
+
+***The authors described in detail the phenotypic features of some subsets of lymphoid cells, including Vd2 T cells, MAIT T cells, and NKT cells from peculiar cohorts of cord blood of neonates. Indeed, they consider cord blood ILT in neonates born to healthy women and women living with HIV, as stated in the abstract.***
+
+We greatly appreciate the reviewer for the time put into this thorough and insightful review.
+
+***The authors also evaluated the presence of some cytokines after stimulation with nonspecific stimuli and components of cytolytic machinery of lymphocytes, such as perforin and CD107a, as markers of functionality of the cell subsets. Also, the phenotypic features of activated cells with BCG or zoledronate and IL2 or only IL2. The presentation of data is detailed and well-performed. The analyses are conducted with rigor and are well-explained.***
+
+We thank the reviewer for acknowledging that within the scope of the study context and immune cells subsets profiled the effort that went into the execution and analysis.
+
+***The main matter with this manuscript is the message given. The authors presented detailed phenotypic data on different cell subsets, but the differences reported are not strong. In addition, the findings reported do not add any insights into the relevance of the subsets analysed in the specific context of the newborns from HIV infected or uninfected mothers.***
+
+We acknowledge that the reviewer addresses an essential point; despite all the markers included to examine innate-like T cells phenotype and function, we only detected limited differences between HU and HEU infants. However, to our knowledge, no prior studies had comprehensively assessed the impact of HIV/ART prenatal exposure on neonatal ILTs, despite the potential for this type of exposure to cause ILT perturbation. One study included total gd T cells in a comparison of T cell responses to BCG in HU versus HEU infants, with minimal assessment of gd T cell heterogeneity and function (Mazzola et al. 2011, DOI: 10.1097/QAD.0b013e32834bba0a). A second, more recent publication had compared frequency of total gd T cells between two-year-old HU and HEU infants enrolled in three different geographic locations, showing a significant difference between exposure groups only in one of the locations (Amenyogbe et al. DOI: 10.4049/jimmunol.2000040). No data was available, to our knowledge, on ILTs in HEU at birth. Our data suggest that ILT are mildly, if at all, perturbed in HEU-lo neonates, but the modest differences in HEU-hi neonates Vd2 cells may hint to greater ILT perturbation in this exposure group. These results are consistent with a prior study suggesting that ART initiation before conception (especially if leading to HIV viral suppression) mitigates fetal immune perturbation compared to initiation during pregnancy (Goetghebuer et al. 2019, DOI: 10.1093/cid/ciy673), and may therefore be beneficial also for the exposed neonates.
+
+In addition, while Vd2 T cells have been assessed at birth in several studies, few papers focused on cord blood MAITs and NKTs, with limited profiling. Some of the studies that do report on these subsets use imprecise proxy markers that don’t accurately define the populations of interest (e.g.: NKT are often defined as CD3+ CD56+ cells). Spectral flow cytometry panels allow for a deep interrogation of Innate-like T cells in newborn infants and establish a baseline for future assessments of perturbation. We therefore report comprehensive data that was not available for these subsets both at baseline and after in utero exposure.
+
+***For instance, it is not determined whether the TCR of Tvd2 cells or other gdT cells are different in the cohorts analyzed. The presence of inhibitory/activating receptors for HLA-class I, such as KIR, is not analyzed.***
+
+Thank you for raising these concerns. We did not include an anti-Vg9 TCR antibody in our panel, as the Vg9 chain at birth is often paired with the Vd1 chain (Morita 1994 JI) and this subset is not known to have innate-like features. However, the anti-Vd2 clone B6 that we used for this study has been reported to recognize primarily the Vd2 chain paired with the Vg9 chain (Davey et al. 2018 DOI: 10.1038/s41467-018-04076-0 and Wragg et al. 2020 DOI: 10.1016/j.celrep.2020.107773), identifying the innate-like subset of Vd2+ T cells, unlike the clone 123R3, which recognized the Vd2 chain paired with any g chain (Ravens et al. 2020, DOI: 10.1073/pnas.1922588117). ILT subsets, including Vd2 T cells, were reported to express various KIR, but to our knowledge the studies including KIRs were performed using adult blood/PBMC specimens. Unlike KLRG1, which is expressed by a significant proportion of cord blood Vd2 T cells (Eberl et al. 2005 DOI: 10.1189/jlb.0204096), some preliminary data we generated in an unpublished study showed that the frequency of KIR+ Vd2 T cells in neonates is low. This observation, combined with the low frequency of ILT subsets in cord blood, raised the concern that we would not be able to acquire a sufficient number of KIR+ cells in any ILT subset to draw statistically significant conclusions about the expression of these receptors.
+
+***The background for viral infections, such as CMV, EBV (besides HIV), or bacterial infections, of mothers is not reported.***
+
+We thank the reviewer for highlighting this important aspect that has now been emphasized in our material and methods (Page 5, lines 101-107, in the full markup of the tracked changes document). Controlling for all the appropriate confounders in mother-infant pair studies in resource limited setting, such as rural sub-Saharan Africa, is challenging, as the ability to screen for infectious morbidity is very limited. Despite these limitations, our study placed significant effort into screening for the main sources of infections during pregnancy that occur in the recruitment area, both by recording maternal sick visits during pregnancy, as well as acquiring biological specimens (including dry blood spots, sera and neonate urine) for retrospective analysis of exposure. At the time of manuscript submission, we have screened all mother and neonates whose data has been included in the study for exposure to malaria (P. falciparum), Dengue, SARS-COV-2 and Syphilis and found no positivity to any pathogen. The testing for congenital CMV is ongoing. However, based on the phenotype and frequencies of Vd1 T cells we observed in the three exposure groups, we do not expect to detect congenital CMV. None of the participants showed expansion of Vd1 T cells at birth, which is known to be associated with in utero responses to congenital CMV infection (Vermijlen et al. 2010, DOI: 10.1084/jem.20090348).
+
+***Overall, the manuscript is well-performed and presented, but the findings reported appear not to be strong enough to give them biological significance. The study appears descriptive.***
+
+We thank the reviewer for giving us an opportunity to clarify the relevance of the paper. The goal of this paper was an exhaustive characterization of phenotypic and functional heterogeneity of Innate-like T cells in African neonates to enable a comparison of HU and HEU newborns. While we observed a limited number of differences between exposure groups, some of the markers were differentially expressed in the HEU-hi across multiple cell subsets, including conventional T cell populations.
+
+In addition, we leveraged an extensive marker overlap with a panel for conventional T cells to enable correlative analyses of innate-like and conventional T cell subsets as part of upcoming analyses. As mentioned previously, these analyses set a new and more comprehensive baseline of findings for rare cell subsets and within a unique cohort of newborn infants.
+
+## Reviewer 2
+
+**Q1:** **Please list your revision requests for the authors and provide your detailed comments, including highlighting limitations and strengths of the study and evaluating the validity of the methods, results, and data interpretation. If you have additional comments based on Q2 and Q3 you can add them as well.**
+
+Summary:\
+This study investigates innate-like T (ILT) cell responses in cord blood from neonates born to healthy women and women living with HIV, with a focus on γδ T cells (Vδ2), mucosal-associated invariant T cells (MAITs), and natural killer T cells (NKTs). Using a high-dimensional spectral flow cytometry (SFC) panel, the authors characterized phenotypic and functional diversity of ILT subsets at birth, including their response to polyclonal stimulation. They show that differences in ILT frequencies and cytokine responses were minimal in HIV-exposed uninfected (HEU) neonates whose mothers initiated antiretroviral therapy (ART) before conception. More pronounced immune alterations were observed in HEU infants born to women diagnosed with HIV during pregnancy and with high viral loads at enrollment (HEU-hi).\
+\
+Comments:\
+In general, the authors should focus the analysis and visualization on the different patient groups (HU, HEU-lo, and HEU-hi) here, as this is the beauty of this study. They are very descriptive on the immune cell populations and phenotypes, and this should be better placed in relation to HU, HEU-lo, and HEU-hi infants.\
+\
+Also, are the findings consistent with previous transcriptomic or proteomic analyses of cord blood T cells in healthy and HEU infants?\
+\
+The data presented across the figures are impressive, but the large number of main figures (currently 11) makes the manuscript somewhat difficult to focus. To help improve clarity and maintain focus on the core findings, I propose to restructure some of the figures.\
+Figures 2, 5, 6, 9, and 11 contain interesting and supportive data, but they could likely be moved to the Supplementary Figure without loss of clarity. Some of them could also be merged:\
+Figures 5 and 6 seem to overlap in focus, and could be combined into a single summary figure showing ILT functional responses.\
+Figure 2 (MAIT/NKT phenotyping) is informative, but given its more descriptive, could be placed in the supplement. Figure 11 on sex-based differences is a nice addition, but may not be central to the main finding on HIV/ART exposure.\
+\
+In Figure 2, the marker expression data from all exposure groups appear to be pooled, which makes it difficult to evaluate immunological trends or differences between HU, HEU-lo, and HEU-hi infants. Even if individual clusters remain consistent, the authors should show how marker expression varies across groups as it will assess potential HIV/ART-related effects more directly.\
+\
+In Figure 9, perforin is included as one of the markers in the heatmap, but it is not described or discussed in the results. Given that perforin is a key cytotoxic effector molecule, particularly relevant to Vδ2 T cell function, it would be helpful if the authors could briefly comment on its expression levels across the different exposure groups (HU, HEU-lo, and HEU-hi). Alternatively, if perforin was excluded from further analysis due to low expression or another reason, this should be clarified.\
+\
+Follow the comment above, do perforin or granzyme expression levels differ between exposure groups at baseline, prior to stimulation. Differences in these cytotoxic effector molecules could provide insight into how the maternal immune environment may shape infant immune potential.\
+\
+How was gestational age assessed and controlled, and could unmeasured differences in fetal maturity impact ILT cell development?\
+\
+From the methods section it is not clear if batch affects in spectral flow cytometry (SFC) acquisition and unmixing rigorously accounted for across the full dataset?\
+\
+\
+The description of results is extremely long, and sometime unfocused. Some of the parts can also be moved to the methods section (e.g. line 330: Data relative to each gated cluster was re-imported into R to calculate the proportion of positive cells for every marker across all individuals.)\
+Please revise the results text, accordingly.\
+\
+The authors should discuss how representative the Malawian cohort is for generalizing these findings to other populations with different genetic backgrounds, healthcare access, and HIV prevalence?\
+\
+The authors should carefully revise the written text for grammar.
+
+![](PeerReview/Reviewer2Checklist.png){fig-align="left"}
+
+## Reply to Reviewer 2
+
+***In general, the authors should focus the analysis and visualization on the different patient groups (HU, HEU-lo, and HEU-hi) here, as this is the beauty of this study. They are very descriptive on the immune cell populations and phenotypes, and this should be better placed in relation to HU, HEU-lo, and HEU-hi infants.***
+
+We would like to thank the reviewer for their extensive review and suggestions. We agree that the comparison between the HEU and HU cohorts is important. We acknowledge that we found subtle differences between the sub-groups in phenotypic and functional markers. The existing information on cord blood ILTs is limited in the breadth of the flow cytometry assessments. Our extensive descriptive analyses of the immune cell population phenotypes and function allow for a reference standard for future researchers looking for information. However, in response to the reviewer observation, we have attempted to rebalance the components to highlight more of the HEU story.
+
+***Also, are the findings consistent with previous transcriptomic or proteomic analyses of cord blood T cells in healthy and HEU infants?***
+
+To our knowledge, there are no other papers that characterize cord blood Innate-like T cells in HEU neonates. Amenyogbe et al. 2020 (doi: 10.4049/jimmunol.2000040) reported ex-vivo frequencies of total gamma T cells in two-year-olds comparing HU and HEU infant cohorts in three different geographic locations and showing a significant difference between exposure groups only in one of the locations. Additionally, a paper from Mazzola et al. 2011 (DOI: 10.1097/QAD.0b013e32834bba0a) expanded 8-month-old infant PBMCs with BCG and observed lower frequencies of total gamma delta in HEU compared to unexposed infants.
+
+Previous findings on cord blood ILTs at homeostasis were limited by the number of phenotypic markers as well as differences in gating strategies employed, which restrict direct comparisons. Beyond flow cytometry data, the mass cytometry dataset from Dzanibe et al. 2024 (https://doi.org/10.1038/s41467-024-47955-5) includes a few cord blood specimens as well as newborn peripheral blood, but the panel does not include ILT markers.
+
+In terms of transcriptional analyses, there is no single-cell data available for HEU neonates. However, bulk RNA-seq data for 12- or 24-month-old infant PBMCs has been published by Musimbi et al. 2019 (https://doi.org/10.1038/s41598-019-54083-4) The data in this paper is not informative for ILT subsets due to their low frequency in PBMCs. Of note, gamma delta single-cell RNA and TCR sequencing data is available for two cord blood specimens \[Tan et al. 2021 (DOI: 10.1126/sciimmunol.abf0125)\]. Interestingly, the innate-like type 3 effector gamma delta T cells described by Tan et al. appear to match our T17 gamma delta subset: both clusters uniquely express CCR6 and produce limited IFNg.
+
+While the current 10x Genomics protocols are not optimized for gamma delta TCR repertoire analyses, some investigators have been able to obtain TCR data using a 5’ chemistry with the addition of custom primers. Employing single cell RNA sequencing analysis would be of great interest to our group.
+
+\
+***The data presented across the figures are impressive, but the large number of main figures (currently 11) makes the manuscript somewhat difficult to focus. To help improve clarity and maintain focus on the core findings, I propose to restructure some of the figures.**\
+**Figures 2, 5, 6, 9, and 11 contain interesting and supportive data, but they could likely be moved to the Supplementary Figure without loss of clarity. Some of them could also be merged: Figures 5 and 6 seem to overlap in focus, and could be combined into a single summary figure showing ILT functional responses. Figure 2 (MAIT/NKT phenotyping) is informative, but given its more descriptive, could be placed in the supplement. Figure 11 on sex-based differences is a nice addition, but may not be central to the main finding on HIV/ART exposure.***
+
+We thank the reviewer for their thoughtful considerations and we have incorporated the following changes:
+
+·       Figure 2 and Figure 6, covering global marker expressions of the three ILT subsets (at baseline and following activation, respectively) have been moved to the Supplemental Figures (SF8-9).
+
+·       A portion of Figure 5 has been merged with the original Figure 6 (now in Supplement Figure 9).
+
+·       Figure 9 and 10, focusing on post-expansion and post-restimulation data have been merged into a single figure (now Figure 6).
+
+·       We have chosen to keep Figure 11 in place as it holds a consistent message of the sex-specific differences, and the rest of this dataset is already in the Supplement.
+
+***In Figure 2, the marker expression data from all exposure groups appear to be pooled, which makes it difficult to evaluate immunological trends or differences between HU, HEU-lo, and HEU-hi infants. Even if individual clusters remain consistent, the authors should show how marker expression varies across groups as it will assess potential HIV/ART-related effects more directly.***
+
+We agree with the reviewer;  the figures have been revised to visualize the individual exposure groups adjacent to each other for each marker.  
+
+\
+***In Figure 9, perforin is included as one of the markers in the heatmap, but it is not described or discussed in the results. Given that perforin is a key cytotoxic effector molecule, particularly relevant to Vδ2 T cell function,it would be helpful if the authors could briefly comment on its expression levels across the different exposure groups (HU, HEU-lo, and HEU-hi). Alternatively, if perforin was excluded from further analysis due to low expression or another reason, this should be clarified.***
+
+We thank the reviewer for catching this omission. We included both perforin and granzyme B in our CFC phenotyping panels, but did not observe any significant differences between exposure groups in any of the culture conditions. The figure can be found in the supporting review file. We have updated the text to clarify that no differences between exposure groups were observed for these important cytotoxic effector molecules (page 22, line 473, in the full markup version of the tracked changes document).
+
+***Follow the comment above, do perforin or granzyme expression levels differ between exposure groups at baseline, prior to stimulation. Differences in these cytotoxic effector molecules could provide insight into how the maternal immune environment may shape infant immune potential.***
+
+We did not include perforin in our SFC panel. The unstimulated CBMC that we used to characterize the ILT baseline were incubated in the presence of golgi transport inhibitors like the PMA/ionomycin-stimulated cells. Since the binding of the dg9 clone to perforin is sensitive to intracellular calcium levels and is abrogated after ionophore treatment \[reported by Hersperger et al. 2008 (DOI: 10.1002/cyto.a.20596)\], staining with dg9 would have yielded unreliable results. With the CFC ex vivo panel we observed low levels of perforin in cord blood Vd2 T cells, consistent with our prior report (doi: 10.1016/j.cellimm.2020.104244). We did not observe any statistically significant differences between exposure groups in terms of perforin or Granzyme B expression in Vd2 T cells. In a separate study focusing a Nigerian infant cohort (analyses still ongoing), we did not observe differences between HU and HEU in the proportion of perforin+ MAITs, with overall proportions of positive cells lower in MAITs than in Vd2 T cells. 
+
+\
+***How was gestational age assessed and controlled, and could unmeasured differences in fetal maturity impact ILT cell development?***
+
+This is an important point.  The estimated gestational age was calculated based on second trimester abdominal ultrasound. We included in this study only participants with a gestational age in the 37-41 week range (referenced in Table 1).  Any gross miscalculation of EGA could impact our findings, as illustrated by Anderson et al 2021 paper (doi: 10.3389/fimmu.2021.777927). However, when we assessed whether frequency of any ILT subsets tracked with reported gestational age, we did not observe any significant correlations for our dataset.
+
+\
+***From the methods section it is not clear if batch affects in spectral flow cytometry (SFC) acquisition and unmixing rigorously accounted for across the full dataset?***
+
+Thank you for highlighting this very important point. Our workflow included several steps designed to prevent/mitigate the impact of batch effects. Experiments were completed within  four months, and samples were acquired on the same 5-laser analyzer after successfully passing QC (the data for which can be viewed on our monitoring website for the year 2023: https://umgccfcss.github.io/Aurora5L/). After acquisition, we ensured proper unmixing and appropriate sample quality using PeacoQC and our Luciernaga R packages, validating each step by visual inspection of NxN plots. When necessary for an analysis dependent on MFI, we normalized using CytoNorm and CyCombine. The Corereba implementation of individual gating adjustments further limited susceptibility to batch effects for frequency-based analyses. When using the heatmap function on the PaCMAP to visualize events by experimental run date, no segregation based on date was obvious, suggesting absence of major batch effects. The figure can be found in the supporting file. 
+
+\
+***The description of results is extremely long, and sometime unfocused. Some of the parts can also be moved to the methods section (e.g. line 330: Data relative to each gated cluster was re-imported into R to calculate the proportion of positive cells for every marker across all individuals.) Please revise the results text, accordingly.***
+
+We thank the reviewer for the suggestion. We had initially opted to include small method refreshers in the results section to ensure the readers had enough context to understand how the data was generated. We have since removed these sentences from the results to refocus the narrative on the findings (page 16 and 18 in the full-markup version of the tracked changes document).  
+
+\
+***The authors should discuss how representative the Malawian cohort is for generalizing these findings to other populations with different genetic backgrounds, healthcare access, and HIV prevalence?***
+
+Based on our results and a prior publication (Amenyogbe et al. 2020 (doi: 10.4049/jimmunol.2000040))  different variables are likely to impact how generalizable the results are in different ways. The genetic background is unlikely to play a substantial role in differences across cohorts, since MHC polymorphisms are thought not to be key for ILT activation (although KIRs could modulate ILT function). The results we obtained for the Vd2 T cells in the Malawian cohort are comparable to those we obtained for the Nigerian cohort that we are still analyzing, and likely to be generalizable. The results for MAITs may vary more based on geographic location and possibly maternal diet. Some of our observations for MAIT cells are comparable between the Malawian and the Nigerian cohort, some are not. HIV maternal viremia is likely to modify immunological infant outcomes, therefore if high prevalence is accompanied by more cases with detectable viremia the results may be different. Access to healthcare is very likely to influence the results observed in this kind of study, since the ability to provide treatment and record relevant clinical information during the follow-up is related to the women’s ability to access their health center/clinic (which for this study served as enrollment and follow up facilities).  
+
+\
+***The authors should carefully revise the written text for grammar.***
+
+We have revised the text to ensure grammatical accuracy.
